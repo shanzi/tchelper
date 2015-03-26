@@ -1,0 +1,17 @@
+{
+  "name": "tchelper-static",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "coffee": "watchify -d -t coffeeify coffee/main.coffee -o build/app.js",
+    "stylus": "watchify -d -t stylify stylus/main.stylus -o build/app.css"
+  },
+  "author": "chase",
+  "license": "BSD",
+  "devDependencies": {
+    "coffeeify": "^1.0.0",
+    "stylify": "^1.2.0"
+  }
+}
