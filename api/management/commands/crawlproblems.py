@@ -96,18 +96,19 @@ class Command(BaseCommand):
         print '-' * 20, ' ', start, ' - ', end, ' ', '-' * 20
         for pid, pname, date, tags, points in self.simple_problems_for_url(self.url_for_problems(start, end)):
             print pid, pname, date, tags, points
-            time.sleep(random.randrange(1, 10))
+            time.sleep(random.randrange(5, 20))
             statement = self.problem_statement_with_id(pid)
-            Problem.objects.create(
+            Problem.objects.get_or_create(
                 problemId=pid,
-                problemName=pname,
-                problemStatement=statement,
-                date=date,
-                tags=tags,
-                points=points
-            )
+                defaults=dict(
+                    problemName=pname,
+                    problemStatement=statement,
+                    date=date,
+                    tags=tags,
+                    points=points
+                ))
 
     def handle(self, *args, **kwargs):
         for i in range(0, 900, 100):
             self.handle_problems_for_range(i + 1, i + 100)
-            time.sleep(random.randrange(1, 10))
+            time.sleep(random.randrange(5, 20))
