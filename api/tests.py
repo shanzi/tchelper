@@ -11,18 +11,14 @@ class ProblemSheetTestCase(TestCase):
             username='testuser',
             email='test@test.com',
             password='password')
-        self.sheet1 = ProblemSheet.objects.create(
-            number=1,
-            user=self.user,
-        )
-        self.sheet2 = ProblemSheet.objects.create(
-            number=2,
-            user=self.user,
-        )
-        self.sheet3 = ProblemSheet.objects.create(
-            number=3,
-            user=self.user,
-        )
+        self.sheet1 = ProblemSheet.add(self.user)
+        self.sheet2 = ProblemSheet.add(self.user)
+        self.sheet3 = ProblemSheet.add(self.user)
+
+    def test_sheet_number(self):
+        self.assertEqual(self.sheet1.number, 1)
+        self.assertEqual(self.sheet2.number, 2)
+        self.assertEqual(self.sheet3.number, 3)
 
     def test_auto_assign_problems(self):
         self.sheet1.auto_assign_problems()

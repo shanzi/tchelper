@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.contrib.auth.models import User
 
 
@@ -18,6 +18,15 @@ class ProblemSheet(models.Model):
     user = models.ForeignKey(User, related_name="sheets")
     date = models.DateField(auto_now_add=True)
 
+    @classmethod
+    @transaction.atomic
+    def add(cls, user):
+        return cls.objects.create(
+            number=user.sheets.count() + 1,
+            user=user
+        )
+
+    @transaction.atomic
     def auto_assign_problems(self):
         if self.problems.count() > 0: return
 
@@ -75,6 +84,7 @@ class ProblemAssignment(models.Model):
             status=status
         )
 
+    @transaction.atomic
     def done_problem(self):
         ProblemAssignment.objects.filter(
             sheet__user=self.sheet.user,
