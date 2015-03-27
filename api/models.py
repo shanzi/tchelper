@@ -7,8 +7,6 @@ class Problem(models.Model):
     problemStatement = models.TextField()
 
     points = models.IntegerField(db_index=True)
-    status = models.CharField(max_length=16, default='New')
-    myPoints = models.IntegerField(default=0)
     tags = models.CharField(max_length=128, db_index=True)
 
     date = models.DateField()
