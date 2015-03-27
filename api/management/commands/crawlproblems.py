@@ -109,6 +109,6 @@ class Command(BaseCommand):
                 ))
 
     def handle(self, *args, **kwargs):
-        for i in range(0, 900, 100):
+        for i in range(0, 1000, 100):
             self.handle_problems_for_range(i + 1, i + 100)
             time.sleep(random.randrange(5, 20))
