@@ -31,16 +31,19 @@ class Command(BaseCommand):
     )
 
     @jobwrap
-    def newSheetJob(self):
-        users = User.objects.all()
+    def new_sheet_job(self):
+        users = User.objects.filter(is_active=True).all()
         for user in users:
             sheet = ProblemSheet.add(user)
             sheet.auto_assign_problems()
             print '* --> new sheet for %s' % user.username
+            
             time.sleep(1)
 
+    def seed_email_job(self, sheet):
+
     def handle(self, flush, *args, **kwargs):
-        schedule.every().monday.do(self.newSheetJob)
+        schedule.every().monday.do(self.new_sheet_job)
 
         if flush:
             print "Flushing all scheduled jobs..."
