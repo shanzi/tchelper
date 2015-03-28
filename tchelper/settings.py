@@ -20,9 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '+%m9a62-i($(xc4ok(3y5!1!=dvydl$n5p$+$85%3g_((un=e@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -83,3 +83,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Email settings
+EMAIL_BASE_URL = os.environ.get('EMAIL_BASE_URL', '')
+MAILGUN_KEY = os.environ.get('MAILGUN_KEY', '')
+MAILGUN_URL = os.environ.get('MAILGUN_URL', '')

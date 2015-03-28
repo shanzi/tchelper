@@ -6,6 +6,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import User
 
 from api.models import ProblemSheet
+from api import utils
 
 
 def jobwrap(func):
@@ -37,10 +38,16 @@ class Command(BaseCommand):
             sheet = ProblemSheet.add(user)
             sheet.auto_assign_problems()
             print '* --> new sheet for %s' % user.username
-            
+            self.send_sheet_email(user, sheet)
             time.sleep(1)
 
-    def seed_email_job(self, sheet):
+    def send_sheet_email(self, user, sheet):
+        text = utils.text_email_body_for_sheet(sheet)
+        html = utils.html_email_body_for_sheet(sheet)
+        mid = utils.send_mail([user.email],
+                              '[TCHelper] Problem Sheet #%d' % sheet.number,
+                              text, html)
+        print '* --> mail sent to %s<%s> [%s]' % (user.username, user.email, mid)
 
     def handle(self, flush, *args, **kwargs):
         schedule.every().monday.do(self.new_sheet_job)
