@@ -24,7 +24,7 @@ DEBUG = (os.environ.get('DJANGO_DEBUG', 'on') == 'on')
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
