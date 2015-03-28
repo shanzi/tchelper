@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 from api.models import ProblemSheet
 
+
 def jobwrap(func):
     def wrap(*args, **kwargs):
         print '* [%s] started' % func.__name__
@@ -28,7 +29,7 @@ class Command(BaseCommand):
                     dest='flush',
                     help='Flush all pending jobs and exit'),
     )
-    
+
     @jobwrap
     def newSheetJob(self):
         users = User.objects.all()
@@ -41,7 +42,7 @@ class Command(BaseCommand):
     def handle(self, flush, *args, **kwargs):
         schedule.every().monday.do(self.newSheetJob)
 
-        if flush: 
+        if flush:
             print "Flushing all scheduled jobs..."
             schedule.run_all()
             return

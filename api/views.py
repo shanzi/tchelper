@@ -10,9 +10,9 @@ def email_body_for_sheet(sheet, base_url):
         'base_url': base_url,
         'number': sheet.number,
         'date': sheet.date,
-        'overdue': [p for p in problems if p['status'] == 'overdue'],
-        'new': [p for p in problems if p['status'] == 'new'],
-        'review': [p for p in problems if p['status'] == 'toreview'],
+        'overdue': [p for p in problems if p['type'] == 'overdue'],
+        'new': [p for p in problems if p['type'] == 'new'],
+        'review': [p for p in problems if p['type'] == 'toreview'],
     }
     return render_to_string('sheet_email.html', data)
 

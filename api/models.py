@@ -32,27 +32,29 @@ class ProblemSheet(models.Model):
 
         overdues = ProblemAssignment.objects.filter(
             sheet__user=self.user,
-            status__in=('new', 'overdue')
-        ).all()
+            type='new',
+            done=False
+        ).prefetch_related('originProblem').all()
 
         for overdue in overdues:
             ProblemAssignment.assign_problem(overdue.originProblem, self, 'overdue')
 
         reviews = ProblemAssignment.objects.filter(
             sheet__user=self.user,
-            status='solved'
+            type='new',
+            done=True,
         ).order_by('?').all()[:2]
 
         for review in reviews:
-            ProblemAssignment.assign_problem(review.originProblem, self, 'toreview')
+            ProblemAssignment.assign_problem(review.originProblem, self, 'review')
 
         total = len(overdues) + len(reviews)
         if total < 12:
             allassigns = ProblemAssignment.objects.filter(
-                sheet__user=self.user
+                sheet__user=self.user,
+                type='new',
             ).values_list('originProblem', flat=True)
-            allassigns = set(allassigns)
-            newproblems = Problem.objects.exclude(problemId__in=allassigns).order_by('?').all()[:12-total]
+            newproblems = Problem.objects.exclude(problemId__in=allassigns).order_by('?').all()[:12 - total]
             for problem in newproblems:
                 ProblemAssignment.assign_problem(problem, self)
 
@@ -64,16 +66,15 @@ class ProblemAssignment(models.Model):
     points = models.IntegerField()
     tags = models.CharField(max_length=128)
     date = models.DateField()
-    status = models.CharField(max_length=10, default='new', choices=(
-        ('new', 'Unsolved problem'), 
-        ('solved', 'Solved problem'),
-        ('overdue', 'Overdue problem'), 
-        ('toreview', 'Problem to review'),
-        ('reviewed', 'Reviewed problem'),
+    done = models.BooleanField(default=False)
+    type = models.CharField(max_length=10, default='new', choices=(
+        ('new', 'Unsolved problem'),
+        ('overdue', 'Overdue problem'),
+        ('review', 'Problem to review'),
     ))
 
     @classmethod
-    def assign_problem(cls, problem, sheet, status='new'):
+    def assign_problem(cls, problem, sheet, type_='new'):
         return cls.objects.create(
             sheet=sheet,
             originProblem=problem,
@@ -81,7 +82,7 @@ class ProblemAssignment(models.Model):
             points=problem.points,
             tags=problem.tags,
             date=problem.date,
-            status=status
+            type=type_
         )
 
     @transaction.atomic
@@ -89,10 +90,4 @@ class ProblemAssignment(models.Model):
         ProblemAssignment.objects.filter(
             sheet__user=self.sheet.user,
             originProblem=self.originProblem,
-            status__in=('toreview', 'solved'),
-        ).update(status='reviewed')
-        ProblemAssignment.objects.filter(
-            sheet__user=self.sheet.user,
-            originProblem=self.originProblem,
-            status__in=('new', 'overdue'),
-        ).update(status='solved')
+        ).update(done=True)

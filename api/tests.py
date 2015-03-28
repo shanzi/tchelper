@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 from api.models import ProblemSheet
 
+
 class ProblemSheetTestCase(TestCase):
     fixtures = ('fixtures/problems.json',)
 
@@ -30,36 +31,37 @@ class ProblemSheetTestCase(TestCase):
             if i % 2 == 0: problem.done_problem()
 
         # test problems is done
-        doneCount = self.sheet1.problems.filter(status='solved').count()
+        doneCount = self.sheet1.problems.filter(done=True).count()
         self.assertEqual(doneCount, 6)
 
         # test toreview count
-        toreviewCount = self.sheet1.problems.filter(status='toreview').count()
+        toreviewCount = self.sheet1.problems.filter(type='review').count()
         self.assertEqual(toreviewCount, 0)
 
         self.sheet2.auto_assign_problems()
 
         # test sheet2 overdue problems
-        overdueCount = self.sheet2.problems.filter(status='overdue').count()
+        overdueCount = self.sheet2.problems.filter(type='overdue').count()
         self.assertEqual(overdueCount, 6)
 
         # test sheet2 toreview problems
-        toreviewCount = self.sheet2.problems.filter(status='toreview').count()
+        toreviewCount = self.sheet2.problems.filter(type='review').count()
         self.assertEqual(toreviewCount, 2)
 
-        for problem in self.sheet2.problems.all():
+        for problem in self.sheet2.problems.filter(type='overdue').all()[:3]:
             problem.done_problem()
 
-        doneCount = self.sheet1.problems.filter(status='solved').count()
-        self.assertEqual(doneCount, 10)
+        for problem in self.sheet2.problems.filter(type='new').all()[:3]:
+            problem.done_problem()
 
-        doneCount = self.sheet2.problems.filter(status='solved').count()
-        self.assertEqual(doneCount, 10)
+        doneCount = self.sheet1.problems.filter(done=True).count()
+        self.assertEqual(doneCount, 9)
 
-        reviewedCount = self.sheet2.problems.filter(status='reviewed').count()
-        self.assertEqual(reviewedCount, 2)
+        doneCount = self.sheet2.problems.filter(done=True).count()
+        self.assertEqual(doneCount, 6)
 
         self.sheet3.auto_assign_problems()
         self.assertEqual(self.sheet3.problems.count(), 12)
-        self.assertEqual(self.sheet3.problems.filter(status='new').count(), 10)
-        self.assertEqual(self.sheet3.problems.filter(status='toreview').count(), 2)
+        self.assertEqual(self.sheet3.problems.filter(type='overdue').count(), 4)
+        self.assertEqual(self.sheet3.problems.filter(type='new').count(), 6)
+        self.assertEqual(self.sheet3.problems.filter(type='review').count(), 2)

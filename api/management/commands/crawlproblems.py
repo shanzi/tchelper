@@ -8,6 +8,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 from api.models import Problem
 
+
 class Command(BaseCommand):
 
     def level_to_int(self, string):
@@ -94,7 +95,7 @@ class Command(BaseCommand):
 
     def handle_problems_for_range(self, start, end):
         print '-' * 20, ' ', start, ' - ', end, ' ', '-' * 20
-        for pid, pname, date, tags, points in self.simple_problems_for_url(self.url_for_problems(start, end)):
+        for pid, pname, date_, tags, points in self.simple_problems_for_url(self.url_for_problems(start, end)):
             print pid, pname, date, tags, points
             time.sleep(random.randrange(5, 20))
             statement = self.problem_statement_with_id(pid)
@@ -103,7 +104,7 @@ class Command(BaseCommand):
                 defaults=dict(
                     problemName=pname,
                     problemStatement=statement,
-                    date=date,
+                    date=date_,
                     tags=tags,
                     points=points
                 ))
