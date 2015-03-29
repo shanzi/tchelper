@@ -12,11 +12,19 @@ class Problem(models.Model):
 
     date = models.DateField(db_index=True)
 
+    @property
+    def owner(self):
+        return None
+
 
 class ProblemSheet(models.Model):
     number = models.IntegerField(db_index=True)
     user = models.ForeignKey(User, related_name="sheets")
     date = models.DateField(auto_now_add=True)
+
+    @property
+    def owner(self):
+        return self.user
 
     @classmethod
     @transaction.atomic
@@ -72,6 +80,10 @@ class ProblemAssignment(models.Model):
         ('overdue', 'Overdue problem'),
         ('review', 'Problem to review'),
     ))
+
+    @property
+    def owner(self):
+        return self.sheet.user
 
     @classmethod
     def assign_problem(cls, problem, sheet, type_='new'):

@@ -88,3 +88,11 @@ STATIC_URL = '/static/'
 EMAIL_BASE_URL = os.environ.get('EMAIL_BASE_URL', '')
 MAILGUN_KEY = os.environ.get('MAILGUN_KEY', '')
 MAILGUN_URL = os.environ.get('MAILGUN_URL', '')
+
+# Rest Frameworks
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}

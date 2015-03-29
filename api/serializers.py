@@ -20,6 +20,7 @@ class ProblemAssignmentSerializer(serializers.ModelSerializer):
 
 
 class ProblemSheetSerializer(serializers.ModelSerializer):
+    problems = ProblemAssignmentSerializer(many=True, read_only=True)
 
     class Meta:
         model = ProblemSheet
