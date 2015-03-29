@@ -12,9 +12,11 @@ class Problem(models.Model):
 
     date = models.DateField(db_index=True)
 
-    @property
-    def owner(self):
-        return None
+
+class ProblemStar(models.Model):
+    problem = models.ForeignKey(Problem)
+    user = models.ForeignKey(User)
+    datetime = models.DateTimeField(auto_now_add=True)
 
 
 class ProblemSheet(models.Model):
