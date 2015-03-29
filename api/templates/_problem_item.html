@@ -1,5 +1,5 @@
 <li style="list-style:none;">
-(<a href="{{ base_url }}/problem/{{ problem.originProblem_id }}">#{{ problem.originProblem_id }}</a>) {{ problem.problemName }}
+(<a href="{{ base_url }}/problems/{{ problem.originProblem_id }}">#{{ problem.originProblem_id }}</a>) {{ problem.problemName }}
 <small style="color: #aaa">{{ problem.date|date:'Y-m-d' }}</small>
 {% if problem.points <= 200 %}
   <small style="color: #EBF511">+</small>

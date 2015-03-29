@@ -1,2 +1,2 @@
   - (#{{ problem.originProblem_id }}) {{ problem.problemName }} [{{ problem.date|date:'Y-m-d' }}] |{% if problem.points <= 200 %}+{% elif problem.points <= 400 %}++{% elif problem.points <= 600 %}+++{% elif problem.points <= 800 %}++++{% else %}+++++{% endif %}|
-    * {{ base_url }}/problem/{{ problem.originProblem_id }}
+    * {{ base_url }}/problems/{{ problem.originProblem_id }}
