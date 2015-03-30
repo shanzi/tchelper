@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "coffee": "watchify -d -t coffeeify coffee/main.coffee -o src/app.js",
-    "stylus": "stylus -w stylus/main.styl -o src/app.css"
+    "coffee": "watchify -d -t coffeeify coffee/main.coffee -o dist/app.js",
+    "stylus": "stylus -w stylus/main.styl -o dist/app.css"
   },
   "author": "chase",
   "license": "BSD",
