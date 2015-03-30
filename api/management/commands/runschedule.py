@@ -50,7 +50,7 @@ class Command(BaseCommand):
         print '* --> mail sent to %s<%s> [%s]' % (user.username, user.email, mid)
 
     def handle(self, flush, *args, **kwargs):
-        schedule.every().monday.do(self.new_sheet_job)
+        schedule.every().monday.at('00:30').do(self.new_sheet_job)
 
         if flush:
             print "Flushing all scheduled jobs..."
@@ -60,4 +60,4 @@ class Command(BaseCommand):
         print "Running schedule..."
         while True:
             schedule.run_pending()
-            time.sleep(3600)
+            time.sleep(60)
