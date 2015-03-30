@@ -5,8 +5,18 @@
   <meta charset="UTF-8">
   <title ng-bind="title"></title>
   <link rel="stylesheet" href="{% static 'dist/app.css' %}" type="text/css">
+  {% if debug %}
+  <link rel="stylesheet" href="http://myicons.herokuapp.com/build/livetesting/058e2e8cd6ae11e484d756aa07d17eb0.css" type="text/css">
+  {% else %}
+
+  {% endif %}
 </head>
 <body>
+<div id="container">
+  <div id="toolbar"></div>
+  <div id="content"></div>
+  <div id="footer"></div>
+</div>
   <script type="text/javascript" dist="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
   <script type="text/javascript" src="{% static 'src/app.js' %}"></script>  
 </body>

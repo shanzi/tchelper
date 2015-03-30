@@ -25,6 +25,7 @@ DEBUG = (os.environ.get('DJANGO_DEBUG', 'on') == 'on')
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
+INTERNAL_IPS = ('127.0.0.1',)
 
 
 # Application definition
