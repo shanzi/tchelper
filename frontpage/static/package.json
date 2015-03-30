@@ -5,13 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "coffee": "watchify -d -t coffeeify coffee/main.coffee -o build/app.js",
-    "stylus": "watchify -d -t stylify stylus/main.stylus -o build/app.css"
+    "coffee": "watchify -d -t coffeeify coffee/main.coffee -o src/app.js",
+    "stylus": "stylus -w stylus/main.styl -o src/app.css"
   },
   "author": "chase",
   "license": "BSD",
   "devDependencies": {
-    "coffeeify": "^1.0.0",
-    "stylify": "^1.2.0"
+    "coffeeify": "^1.0.0"
   }
 }
