@@ -87,6 +87,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 # Email settings
+EMAIL_BACKEND = 'api.utils.MailgunEmailBackEnd'
 EMAIL_BASE_URL = os.environ.get('EMAIL_BASE_URL', '')
 MAILGUN_KEY = os.environ.get('MAILGUN_KEY', '')
 MAILGUN_URL = os.environ.get('MAILGUN_URL', '')
