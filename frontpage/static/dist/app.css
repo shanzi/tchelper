@@ -66,7 +66,7 @@ a:hover {
 #container {
   max-width: 620px;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 #content {
   min-height: 480px;
@@ -96,6 +96,7 @@ a:hover {
 #footer {
   height: 60px;
   padding: 20px 0 10px;
+  margin-top: 20px;
   font-size: 12px;
   color: rgba(0,0,0,0.3);
   border-top: 1px solid rgba(0,0,0,0.15);
@@ -106,7 +107,7 @@ a:hover {
 .site-index .logo-big {
   font-size: 120px;
   line-height: 100px;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 .site-index .site-abstract {
   color: rgba(0,0,0,0.44);
