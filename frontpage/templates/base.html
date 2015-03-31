@@ -1,0 +1,18 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TCHelper</title>
+  <link rel="stylesheet" href="{% static 'dist/app.css' %}" type="text/css">
+  {% if debug %}
+  <link rel="stylesheet" href="http://myicons.herokuapp.com/build/livetesting/058e2e8cd6ae11e484d756aa07d17eb0.css" type="text/css">
+  {% else %}
+
+  {% endif %}
+</head>
+<body>
+  {% block body %}
+  {% endblock body %}
+</body>
+</html>

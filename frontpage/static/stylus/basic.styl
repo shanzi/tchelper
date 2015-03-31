@@ -7,14 +7,29 @@ body
   font-size: 16px
   font-weight: 400
   font-family: 'Open Sans'
-  color: #444
+  color: text-color
 
 pre, code
   font-family: 'Cutive Mono', Mono
 
-article, p
+.serif
   font-family: 'Source Serif Pro', 'serif'
-  color: #333
 
 h1, h2, h3, h4, h5, h6, b
   font-weight: 600
+
+a
+  text-decoration: none
+  color: link-color
+
+  &:hover
+    text-decoration: none
+    color: link-color-highlighted
+
+#container
+  max-width: 620px
+  margin: 0 auto
+  padding: 0 10px
+
+#content
+  min-height: 480px
