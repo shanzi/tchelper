@@ -1,7 +1,10 @@
 import requests
+from StringIO import StringIO
 
 from django.conf import settings
 from django.template.loader import render_to_string
+from django.core.mail.message import sanitize_address
+from django.core.mail.backends.base import BaseEmailBackend
 
 
 def html_email_body_for_sheet(sheet, base_url=None):
@@ -32,18 +35,28 @@ def text_email_body_for_sheet(sheet, base_url=None):
     return render_to_string('sheet_email_body.text', data)
 
 
-def send_mail(toaddrs, subject, text_body, html_body=None):
-    html_body = html_body or text_body
-    r = requests.post(
-        settings.MAILGUN_URL,
-        auth=("api", settings.MAILGUN_KEY),
-        data={"from": "TCHelper <no-reply@tch.io-meter.com>",
-              "to": toaddrs,
-              "subject": subject,
-              "text": text_body,
-              "html": html_body,
-              })
-    if r.ok:
-        return r.json()['id']
-    else:
-        raise Exception('Failed to send email')
+class MailgunEmailBackEnd(BaseEmailBackend):
+
+    def open(self):
+        pass
+
+    def close(self):
+        pass
+
+    def _send_message(self, email_message):
+        from_email = sanitize_address(email_message.from_email, email_message.encoding)
+        recipients = [sanitize_address(addr, email_message.encoding) for addr in email_message.recipients()]
+        r = requests.post(
+            settings.MAILGUN_URL,
+            auth=("api", settings.MAILGUN_KEY),
+            data = {
+                'form': from_email,
+                'to': recipients,
+            },
+            files = {
+                'message': StringIO(email_message.message().as_string())
+            })
+        return r.ok
+
+    def send_messages(self, email_messages):
+        return sum(1 for msg in email_messages if self._send_message(msg))
