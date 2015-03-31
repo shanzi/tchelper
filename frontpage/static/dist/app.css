@@ -106,25 +106,26 @@ form input.button {
   border-radius: 5px;
   line-height: 20px;
 }
+form .errors {
+  padding: 10px 20px;
+  margin: 10px 0;
+  color: #fa7548;
+  background: #ffe9e3;
+  border: 1px solid #ffc2b3;
+  border-radius: 3px;
+}
 .login-form,
-.signup-form {
+.signup-form,
+.change-password-form {
   max-width: 300px;
   margin: 100px auto 10px;
   text-align: center;
   font-size: 14px;
 }
 .login-form p.title,
-.signup-form p.title {
+.signup-form p.title,
+.change-password-form p.title {
   font-size: 40px;
-}
-.login-form .errors,
-.signup-form .errors {
-  padding: 10px;
-  margin: 10px 0;
-  color: #fa7548;
-  background: #ffe9e3;
-  border: 1px solid #ffc2b3;
-  border-radius: 3px;
 }
 #toolbar {
   height: 80px;
@@ -139,8 +140,8 @@ form input.button {
   display: inline-block;
   width: 60px;
   height: 60px;
-  font-size: 50px;
-  line-height: 60px;
+  font-size: 60px;
+  line-height: 70px;
   color: rgba(0,0,0,0.8);
 }
 #footer {

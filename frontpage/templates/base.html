@@ -15,6 +15,11 @@
 <div id="container" class="site-index">
   <div id="toolbar">
     {% block toolbar %}
+    <div class="buttons">
+      <a class="button" href="{% url 'signup' %}">SIGN UP</a>
+      <a class="button" href="{% url 'login' %}">LOG IN</a>
+    </div>
+    {% include "_logo.html" %}
     {% endblock toolbar %}
   </div>
   <div id="content">

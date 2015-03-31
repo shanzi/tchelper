@@ -31,7 +31,7 @@ INTERNAL_IPS = ('127.0.0.1',)
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -92,6 +92,7 @@ EMAIL_BACKEND = 'api.utils.MailgunEmailBackEnd'
 EMAIL_BASE_URL = os.environ.get('EMAIL_BASE_URL', '')
 MAILGUN_KEY = os.environ.get('MAILGUN_KEY', '')
 MAILGUN_URL = os.environ.get('MAILGUN_URL', '')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', '')
 
 # Rest Frameworks
 REST_FRAMEWORK = {
@@ -104,3 +105,4 @@ REST_FRAMEWORK = {
 # Account settings
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
