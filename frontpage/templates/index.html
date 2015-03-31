@@ -1,41 +1,39 @@
 {% extends "base.html" %}
-{% block body %}
-<div id="container" class="site-index">
-    <div id="toolbar">
-        <a class="button" href="">SIGN UP</a>
-        <a class="button" href="">LOG IN</a>
-    </div>
-    <div id="content">
-        <div class="logo-big">
-            <i class="tch-logo"></i>
-        </div>
-        <div class="site-abstract">
-            Plan and track your algorithm practicing.
-        </div>
-        <div class="site-intro">
-            <b>TCHelper</b> is a useful tool you can play with to improve your algorithm skills.
-            It can plan and track your practicing progress and help you get prepared for a coding interview.
-        </div>
-        <ul class="features">
-            <li>
-            <i class="marker tch-checkmark"></i>
-            <span>Over 1000 problems from TopCoder in storage. </span>
-            </li>
-            <li>
-            <i class="marker tch-checkmark"></i>
-            <span>12 problems will be prepared for you every week.</span>
-            </li>
-            <li>
-            <i class="marker tch-checkmark"></i>
-            <span>Log your progress after you solved a problem.</span>
-            </li>
-        </ul>
-        <div class="get-started">
-            It is free to use. You can get started by <a href="">signing up</a> a new account.
-        </div>
-    </div>
-    <div id="footer">
-        <b>TCHelper</b> is released under BSD licence at <a href="//github.com/shanzi/tchelper" target="_blank">GitHub</a>.
-    </div>
+{% block toolbar %}
+<div class="buttons">
+  <a class="button" href="">SIGN UP</a>
+  <a class="button" href="">LOG IN</a>
 </div>
-{% endblock body %}
+{% endblock toolbar %}
+
+{% block content %}
+<div class="site-index">
+  <div class="logo-big">
+    <i class="tch-logo"></i>
+  </div>
+  <div class="site-abstract">
+    Plan and track your algorithm practicing.
+  </div>
+  <div class="site-intro">
+    <b>TCHelper</b> is a useful tool you can play with to improve your algorithm skills.
+    It can plan and track your practicing progress and help you get prepared for a coding interview.
+  </div>
+  <ul class="features">
+    <li>
+    <i class="marker tch-checkmark"></i>
+    <span>Over 1000 problems from TopCoder in storage. </span>
+    </li>
+    <li>
+    <i class="marker tch-checkmark"></i>
+    <span>12 problems will be prepared for you every week.</span>
+    </li>
+    <li>
+    <i class="marker tch-checkmark"></i>
+    <span>Log your progress after you solved a problem.</span>
+    </li>
+  </ul>
+  <div class="get-started">
+    It is free to use. You can get started by <a href="">signing up</a> a new account.
+  </div>
+</div>
+{% endblock content %}
