@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block toolbar %}
+<div class="buttons">
+  <a class="button" href="{% url 'signup' %}">SIGN UP</a>
+</div>
+{% include "_logo.html" %}
+{% endblock toolbar %}
+
+{% block content %}
+<div>
+  <form class="login-form" action="" method="post">
+    {% csrf_token %}
+    <p class="title"><i class="tch-logo"></i></p>
+    <p>Log in with your username and password</p>
+    <input id="username" type="input" name="username" placeholder="Username" value="{{ form.username.value|default:'' }}"/>
+    <input id="password" type="password" name="password" placeholder="Password" />
+    {% if form.errors %}
+    <p class="errors">Invalid username or password.</p>
+    {% endif %}
+    <input class="button" type="submit" id="submit" value="Log In" />
+    <a href="{% url 'password_reset' %}" >Forget your password?</a>
+  </form>
+</div>
+{% endblock content %}

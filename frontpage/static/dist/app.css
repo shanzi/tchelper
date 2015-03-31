@@ -88,6 +88,44 @@ a:hover {
   color: rgba(0,0,0,0.6);
   border-color: rgba(0,0,0,0.3);
 }
+form input {
+  display: block;
+  width: 100%;
+  height: 40px;
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 3px;
+  font-size: 20px;
+  text-align: center;
+  margin: 10px 0;
+}
+form input.button {
+  font-size: 18px;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: #fafafa;
+  border-radius: 5px;
+  line-height: 20px;
+}
+.login-form,
+.signup-form {
+  max-width: 300px;
+  margin: 100px auto 10px;
+  text-align: center;
+  font-size: 14px;
+}
+.login-form p.title,
+.signup-form p.title {
+  font-size: 40px;
+}
+.login-form .errors,
+.signup-form .errors {
+  padding: 10px;
+  margin: 10px 0;
+  color: #fa7548;
+  background: #ffe9e3;
+  border: 1px solid #ffc2b3;
+  border-radius: 3px;
+}
 #toolbar {
   height: 80px;
   margin-bottom: 20px;
@@ -95,13 +133,15 @@ a:hover {
 }
 #toolbar .buttons {
   text-align: right;
+  float: right;
 }
 #toolbar .logo {
-  float: left;
-  width: 80px;
-  height: 80px;
-  font-size: 80px;
-  line-height: 80px;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  font-size: 50px;
+  line-height: 60px;
+  color: rgba(0,0,0,0.8);
 }
 #footer {
   height: 60px;

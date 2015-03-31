@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block toolbar %}
 <div class="buttons">
-  <a class="button" href="">SIGN UP</a>
-  <a class="button" href="">LOG IN</a>
+  <a class="button" href="{% url 'signup' %}">SIGN UP</a>
+  <a class="button" href="{% url 'login' %}">LOG IN</a>
 </div>
 {% endblock toolbar %}
 
