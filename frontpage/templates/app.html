@@ -43,8 +43,9 @@ TEMPLATE_PATH_BASE = "{% static 'templates' %}";
 <script src="{% static 'deps/angular-touch.min.js' %}"></script>
 <script src="{% static 'deps/angular-animate.min.js' %}"></script>
 <script src="{% static 'deps/angular-resource.min.js' %}"></script>
+<script src="{% static 'deps/loading-bar.min.js' %}"></script>
 {% else %}
-<script src="{% static 'deps/angular.all.js' %}"></script>
+<script src="{% static 'deps/all.js' %}"></script>
 {% endif %}
 <script src="{% static 'dist/app.js' %}"></script>
 {% endblock scripts %}

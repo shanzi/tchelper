@@ -15,6 +15,7 @@ angular.module('tchApp', [
   'ngTouch',
   'ngAnimate',
   'ngResource',
+  'angular-loading-bar',
 ]).controller 'appCtrl', appCtrl
   .config ($routeProvider, $resourceProvider, $locationProvider) ->
 
