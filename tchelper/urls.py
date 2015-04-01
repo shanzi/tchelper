@@ -6,6 +6,7 @@ urlpatterns = patterns(
     '',
     # Examples:
     url(r'^$', 'frontpage.views.index'),
+    url(r'^i/.*$', 'frontpage.views.app', name='app'),
     url(r'^api/', include('api.urls')),
     url(r'^account/', include('django.contrib.auth.urls')),
     url(r'^account/signup/$', 'frontpage.views.signup', name='signup'),

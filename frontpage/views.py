@@ -1,6 +1,6 @@
 from django import forms
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm as OriginUserCreateForm
 from django.contrib.auth import login
 
@@ -10,19 +10,26 @@ class UserCreationForm(OriginUserCreateForm):
 
 
 def index(request):
-    return render(request, 'index.html')
+    if request.user.is_authenticated():
+        return redirect('app')
+    else:
+        return render(request, 'index.html')
+
+
+def app(request):
+    return render(request, 'app.html')
 
 
 def signup(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/')
+        return redirect('app')
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
             login(request, new_user)
-            return HttpResponseRedirect('/')
+            return redirect('app')
     else:
         form = UserCreationForm()
 

@@ -1,10 +1,52 @@
-{% extends "base.html" %}
-{% block body %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" ng-app="tchApp" ng-controller="appCtrl as app">
+<head>
+  <meta charset="UTF-8">
+  <title ng-bind="app.title">TCHelper</title>
+  <link rel="stylesheet" href="{% static 'dist/app.css' %}" type="text/css">
+  {% if debug %}
+  <link rel="stylesheet" href="http://myicons.herokuapp.com/build/livetesting/058e2e8cd6ae11e484d756aa07d17eb0.css" type="text/css">
+  {% else %}
+
+  {% endif %}
+</head>
+<body class="app">
 <div id="container">
-  <div id="toolbar"></div>
-  <div id="content"></div>
-  <div id="footer"></div>
+  <div id="toolbar">
+    {% block toolbar %}
+    <div class="buttons">
+      <a class="button" href="{% url 'app' %}/"><i class="tch-flag"></i></a>
+      <a class="button" href="{% url 'app' %}/search"><i class="tch-search"></i></a>
+      <a class="button" href="{% url 'app' %}/person"><i class="tch-person"></i></a>
+    </div>
+    {% include "_logo.html" %}
+    {% endblock toolbar %}
+  </div>
+  <div id="content">
+    {% block content %}
+    <div ng-view></div>
+    {% endblock content %}
+  </div>
+  <div id="footer">
+    <b>TCHelper</b> is released under BSD licence at <a href="//github.com/shanzi/tchelper" target="_blank">GitHub</a>.
+  </div>
 </div>
-<script type="text/javascript" dist="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-<script type="text/javascript" src="{% static 'src/app.js' %}"></script>  
-{% endblock body %}
+{% block scripts %}
+<base href="{% url 'app' %}" />
+<script type="text/javascript" charset="utf-8">
+TEMPLATE_PATH_BASE = "{% static 'templates' %}";
+</script>
+{% if debug %}
+<script src="{% static 'deps/angular.min.js' %}"></script>
+<script src="{% static 'deps/angular-route.min.js' %}"></script>
+<script src="{% static 'deps/angular-touch.min.js' %}"></script>
+<script src="{% static 'deps/angular-animate.min.js' %}"></script>
+<script src="{% static 'deps/angular-resource.min.js' %}"></script>
+{% else %}
+<script src="{% static 'deps/angular.all.js' %}"></script>
+{% endif %}
+<script src="{% static 'dist/app.js' %}"></script>
+{% endblock scripts %}
+</body>
+</html>
