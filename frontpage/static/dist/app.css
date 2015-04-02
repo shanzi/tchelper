@@ -345,41 +345,53 @@ form .errors {
   border: 1px solid #a9d8b2;
   background: rgba(87,173,104,0.1);
 }
-.app .assignment,
-.app .problem {
+.app problem {
+  display: block;
   padding-top: 35px;
   padding-bottom: 33px;
   border-bottom: 1px solid rgba(0,0,0,0.15);
 }
-.app .assignment .tags,
-.app .problem .tags {
+.app problem .tags {
   font-family: 'Source Serif Pro', 'serif';
   padding: 5px 0;
 }
-.app .assignment .meta,
-.app .problem .meta {
+.app problem .meta {
   padding-top: 5px;
   font-size: 15px;
   color: rgba(0,0,0,0.44);
 }
-.app .assignment .meta .problem-type,
-.app .problem .meta .problem-type {
+.app problem .meta .problem-type {
   text-transform: uppercase;
   font-size: 11px;
 }
-.app .assignment .meta .problem-type.overdue,
-.app .problem .meta .problem-type.overdue {
+.app problem .meta .problem-type.overdue {
   color: #eb901b;
 }
-.app .assignment .meta .problem-type.new,
-.app .problem .meta .problem-type.new {
+.app problem .meta .problem-type.new {
   color: #3f88eb;
 }
-.app .assignment .meta .problem-type.review,
-.app .problem .meta .problem-type.review {
+.app problem .meta .problem-type.review {
   color: #629413;
 }
-.app .problems .assignment:last-child,
-.app .problems .problem:last-child {
+.app problem .done-marker {
+  display: block;
+  float: right;
+  width: 24px;
+  height: 24px;
+  color: rgba(0,0,0,0.3);
+  border: 1px solid #f0f0f0;
+  background: #fafafa;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 24px;
+  margin-top: 24px;
+  font-size: 24px;
+}
+.app problem .done-marker.done {
+  color: #fff;
+  background: #55d86c;
+  border-color: none;
+}
+.app .problems problem:last-child {
   border-bottom: none;
 }

@@ -1,16 +1,15 @@
+utils = require './utils.coffee'
 
 appCtrl = require './appCtrl.coffee'
 sheetCtrl = require './sheetCtrl.coffee'
 doneCtrl = require './doneCtrl.coffee'
 personCtrl = require './personCtrl.coffee'
 
+problemDirective = require './problemDirective.coffee'
+
 models = require './models.coffee'
 
-
-template_path = (path) ->
-  path ?= ''
-  return TEMPLATE_PATH_BASE + '/' + path
-
+template_path = utils.template_path
 
 angular.module('tchApp', [
   'ngRoute',
@@ -21,7 +20,11 @@ angular.module('tchApp', [
 ])
   .controller 'appCtrl', appCtrl
   .controller 'sheetCtrl', sheetCtrl
+
+  .directive 'problem', problemDirective
+
   .factory '$models', models
+
   .config ($routeProvider) ->
     $routeProvider
       .when '/',

@@ -1,5 +1,6 @@
-api_path = (path) ->
-  return API_PATH_BASE + path
+utils = require './utils.coffee'
+
+api_path = utils.api_path
 
 module.exports = ($resource) ->
   'Problem':

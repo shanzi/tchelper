@@ -10,44 +10,24 @@
     </section>
     <section class="problems" ng-if="sheet.has_overdue">
       <h2 class="section-title">problems<span class="dot-divider"></span>overdue</h2>
-      <div class="assignment" ng-repeat="problem in sheet.problems|filter:{type:'overdue'}:strict|orderBy:'points'">
-        <small class="subtitle" ng-bind="problem.date"></small>
-        <h3 ng-bind="problem.problemName"></h3>
-        <div class="tags" ng-bind="problem.tags"></div>
-        <div class="meta">
-          <a>Continue reading</a>
-          <span class="dot-divider"></span>
-          <span ng-bind="problem.points"></span> points
-          <span class="dot-divider"></span>
-          <span ng-class="problem.type" ng-bind="problem.type" class="problem-type"></span>
-        </div>
-      </div>
+      <problem 
+        ng-repeat="problem in sheet.problems|filter:{type:'overdue'}:strict|orderBy:'points'"
+        problem="problem"
+      ></problem>
     </section>
     <section class="problems" ng-if="sheet.has_new">
       <h2 class="section-title">problems<span class="dot-divider"></span>new</h2>
-      <div class="assignment" ng-repeat="problem in sheet.problems|filter:{type:'new'}|orderBy:'points'">
-        <small class="subtitle" ng-bind="problem.date"></small>
-        <h3 ng-bind="problem.problemName"></h3>
-        <div class="tags" ng-bind="problem.tags"></div>
-        <div class="meta">
-          <a>Continue reading</a>
-          <span class="dot-divider"></span>
-          <span ng-bind="problem.points"></span> points
-        </div>
-      </div>
+      <problem 
+        ng-repeat="problem in sheet.problems|filter:{type:'overdue'}:strict|orderBy:'points'"
+        problem="problem"
+      ></problem>
     </section>
     <section class="problems" ng-if="sheet.has_review">
       <h2 class="section-title">problems<span class="dot-divider"></span>review</h2>
-      <div class="assignment" ng-repeat="problem in sheet.problems|filter:{type:'review'}|orderBy:'points'">
-        <small class="subtitle" ng-bind="problem.date"></small>
-        <h3 ng-bind="problem.problemName"></h3>
-        <div class="tags" ng-bind="problem.tags"></div>
-        <div class="meta">
-          <a>Continue reading</a>
-          <span class="dot-divider"></span>
-          <span ng-bind="problem.points"></span> points
-        </div>
-      </div>
+      <problem 
+        ng-repeat="problem in sheet.problems|filter:{type:'overdue'}:strict|orderBy:'points'"
+        problem="problem"
+      ></problem>
     </section>
   </div>
 </div>
