@@ -14,7 +14,7 @@ router = DefaultRouter()
 
 router.register('problems', ProblemViewSet)
 router.register('assignments', ProblemAssignmentViewSet)
-router.register('sheets', ProblemSheetViewSet)
+router.register('sheets', ProblemSheetViewSet, base_name='sheet')
 
 urlpatterns = patterns('',
                        url(r'^', include(router.urls)),

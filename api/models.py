@@ -12,11 +12,22 @@ class Problem(models.Model):
 
     date = models.DateField(db_index=True)
 
+    users = models.ManyToManyField(
+        User,
+        through='ProblemStar',
+        through_fields=('problem', 'user'),
+        related_name='starred_problems',
+    )
+
 
 class ProblemStar(models.Model):
-    problem = models.ForeignKey(Problem)
-    user = models.ForeignKey(User)
-    datetime = models.DateTimeField(auto_now_add=True)
+    problem = models.ForeignKey(Problem, related_name='stars')
+    user = models.ForeignKey(User, related_name='stars')
+    datetime = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        ordering = ('-datetime', )
+        unique_together = ('problem', 'user')
 
 
 class ProblemSheet(models.Model):

@@ -1,7 +1,11 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.decorators import detail_route
 from rest_framework.permissions import IsAuthenticated
+
+from rest_framework.decorators import (
+    list_route,
+    detail_route
+)
 
 from api.models import (
     Problem,
@@ -25,6 +29,15 @@ class ProblemViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Problem.objects.all()
     serializer_class = ProblemSerializer
     permission_classes = (IsAuthenticated, )
+
+    @list_route(methods=['get'])
+    def starred(self, request):
+        starred_problems = request.user.starred_problems.all()
+        page = self.paginate_queryset(starred_problems)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        return Response({})
 
     @detail_route(methods=['post'])
     def star(self, request, pk=None):
@@ -62,10 +75,23 @@ class ProblemViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ProblemAssignmentViewSet(viewsets.ReadOnlyModelViewSet):
 
-    paginate_by = 12
+    paginate_by = 20
     queryset = ProblemAssignment.objects.all()
     serializer_class = ProblemAssignmentSerializer
     permission_classes = (IsAuthenticated, IsOwner)
+
+    @list_route(methods=['get'])
+    def solved(self, request):
+        solved_assignments = ProblemAssignment.objects.filter(
+            sheet__user=request.user,
+            type='new',
+            done=True
+        ).all()
+        page = self.paginate_queryset(solved_assignments)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        return Response({})
 
     @detail_route(methods=['post', 'patch'])
     def done(self, request, pk=None):
@@ -76,6 +102,9 @@ class ProblemAssignmentViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ProblemSheetViewSet(viewsets.ReadOnlyModelViewSet):
 
-    queryset = ProblemSheet.objects.all()
     serializer_class = ProblemSheetSerializer
     permission_classes = (IsAuthenticated, IsOwner)
+    lookup_field = 'number'
+
+    def get_queryset(self):
+        return self.request.user.sheets.all()
