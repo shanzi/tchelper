@@ -4,6 +4,8 @@ sheetCtrl = require './sheetCtrl.coffee'
 doneCtrl = require './doneCtrl.coffee'
 personCtrl = require './personCtrl.coffee'
 
+models = require './models.coffee'
+
 
 template_path = (path) ->
   path ?= ''
@@ -16,15 +18,17 @@ angular.module('tchApp', [
   'ngAnimate',
   'ngResource',
   'angular-loading-bar',
-]).controller 'appCtrl', appCtrl
-  .config ($routeProvider, $resourceProvider, $locationProvider) ->
-
+])
+  .controller 'appCtrl', appCtrl
+  .controller 'sheetCtrl', sheetCtrl
+  .factory '$models', models
+  .config ($routeProvider) ->
     $routeProvider
       .when '/',
-        controller: sheetCtrl
-        controlerAs: 'sheet'
+        controller: 'sheetCtrl'
+        controllerAs: 'sheet'
         templateUrl: template_path('sheet.html')
-      .when '/search',
+      .when '/done',
         controller: doneCtrl
         controllerAs: 'done'
         templateUrl: template_path('done.html')
@@ -35,4 +39,14 @@ angular.module('tchApp', [
       .otherwise
         redirectTo: '/'
 
+  .config ($resourceProvider) ->
+    $resourceProvider.defaults.stripTrailingSlashes = false
+
+  .config ($locationProvider) ->
     $locationProvider.html5Mode true
+
+  .config (cfpLoadingBarProvider) ->
+    cfpLoadingBarProvider.includeSpinner = false
+
+  .config ($httpProvider) ->
+    csrf_token = document.querySelector('meta[name=csrf-token]').content

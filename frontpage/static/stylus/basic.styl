@@ -6,14 +6,11 @@
 body
   font-size: 16px
   font-weight: 400
-  font-family: 'Open Sans'
+  font-family: font-sans
   color: text-color
 
-pre, code
-  font-family: 'Cutive Mono', Mono
-
-.serif
-  font-family: 'Source Serif Pro', 'serif'
+code
+  font-family: font-mono
 
 h1, h2, h3, h4, h5, h6, b
   font-weight: 600
@@ -25,6 +22,14 @@ a
   &:hover
     text-decoration: none
     color: link-color-highlighted
+
+.dot-divider
+  padding: 0 0.45em
+  color: text-color-light
+
+  &:after
+    content: '·'
+  
 
 #container
   max-width: 620px

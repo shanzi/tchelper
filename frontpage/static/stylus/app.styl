@@ -7,3 +7,68 @@
       overflow: hidden
       padding: 0
       color: text-color
+
+  .title
+    font-weight: normal
+
+  .subtitle
+    color: text-color-light
+  
+  section
+    margin: 30px 0
+    border-top: 1px solid divider-color
+    padding: 15px 0
+
+    .section-title
+      text-transform: uppercase
+      font-weight: 600
+      color: text-color-lighter
+      font-size: 11px
+      line-height: 15px
+      letter-spacing: 1.1px
+      margin-bottom: 10px
+
+  .tag
+    font-size: 13px
+    display: inline-block
+    color: tag-color
+    border: 1px solid  tag-border-color
+    background: tag-bg-color
+    padding: 3px 10px
+    cursor: pointer
+    margin-right: 8px
+    margin-bottom: 8px
+    border-radius: 2px
+
+    &:hover
+      color: tag-color-highlighted
+      border: 1px solid tag-border-color-highlighted
+      background: tag-bg-color-highlighted
+
+  .assignment, .problem
+    padding-top: 35px
+    padding-bottom: 33px
+    border-bottom: 1px solid divider-color
+
+    .tags
+      font-family: font-serif
+      padding: 5px 0
+
+    .meta
+      padding-top: 5px
+      font-size: 15px
+      color: text-color-light
+
+      .problem-type
+        text-transform: uppercase
+        font-size: 11px
+
+        &.overdue
+          color: #EB901B
+        &.new
+          color: #3F88EB
+        &.review
+          color: #629413
+
+  .problems .assignment:last-child, .problems .problem:last-child
+    border-bottom: none

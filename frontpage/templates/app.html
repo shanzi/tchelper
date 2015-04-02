@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title ng-bind="app.title">TCHelper</title>
   <link rel="stylesheet" href="{% static 'dist/app.css' %}" type="text/css">
+  <meta name="csrf-token" content="{{ csrf_token }}">
   {% if debug %}
   <link rel="stylesheet" href="http://myicons.herokuapp.com/build/livetesting/058e2e8cd6ae11e484d756aa07d17eb0.css" type="text/css">
   {% else %}
@@ -36,6 +37,7 @@
 <base href="{% url 'app' %}" />
 <script type="text/javascript" charset="utf-8">
 TEMPLATE_PATH_BASE = "{% static 'templates' %}";
+API_PATH_BASE = "/api"
 </script>
 {% if debug %}
 <script src="{% static 'deps/angular.min.js' %}"></script>

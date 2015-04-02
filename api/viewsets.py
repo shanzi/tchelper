@@ -108,3 +108,12 @@ class ProblemSheetViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         return self.request.user.sheets.all()
+
+    @list_route(methods=['GET'])
+    def latest(self, request):
+        if self.request.user.sheets.count() > 0:
+            latest_sheet = self.request.user.sheets.last()
+            serializer = self.get_serializer(latest_sheet)
+            return Response(serializer.data)
+        else:
+            return Response({})
