@@ -18,14 +18,14 @@
     <section class="problems" ng-if="sheet.has_new">
       <h2 class="section-title">problems<span class="dot-divider"></span>new</h2>
       <problem 
-        ng-repeat="problem in sheet.problems|filter:{type:'overdue'}:strict|orderBy:'points'"
+        ng-repeat="problem in sheet.problems|filter:{type:'new'}:strict|orderBy:'points'"
         problem="problem"
       ></problem>
     </section>
     <section class="problems" ng-if="sheet.has_review">
       <h2 class="section-title">problems<span class="dot-divider"></span>review</h2>
       <problem 
-        ng-repeat="problem in sheet.problems|filter:{type:'overdue'}:strict|orderBy:'points'"
+        ng-repeat="problem in sheet.problems|filter:{type:'review'}:strict|orderBy:'points'"
         problem="problem"
       ></problem>
     </section>
