@@ -469,3 +469,6 @@ form .errors {
   font-size: 20px;
   line-height: 14px;
 }
+.app .load-more {
+  text-align: center;
+}

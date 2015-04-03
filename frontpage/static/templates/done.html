@@ -1,0 +1,20 @@
+<div class="done-list" ng-if="done.doneData != null">
+  <small class="subtitle">
+    <b ng-bind="done.count"></b>
+    in total
+  </small>
+  <h1 class="title">Solved Problems</h1>
+  <div ng-if="done.count == 0">
+  No solved problems yet.
+  </div>
+  <section class="problems" ng-if="done.count > 0">
+    <h2 class="section-title">Problems</h2>
+    <problem 
+        ng-repeat="problem in done.problems"
+        problem="problem"
+      ></problem>
+  </section>
+  <div class="load-more" ng-if="done.next != null">
+    <a class="button" ng-click="done.load_more()">More</a>
+  </div>
+</div>
