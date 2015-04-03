@@ -453,3 +453,19 @@ form .errors {
   border-collapse: collapse;
   word-wrap: break-word;
 }
+.app .star {
+  text-align: center;
+}
+.app .star .button {
+  color: #57ad68;
+  border-color: #a9d8b2;
+}
+.app .star .button:hover {
+  color: #468c54;
+  border-color: #57ad68;
+}
+.app .star i.tch-star,
+.app .star i.tch-star-outline {
+  font-size: 20px;
+  line-height: 14px;
+}

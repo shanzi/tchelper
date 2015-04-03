@@ -7,6 +7,17 @@ module.exports = ($resource) ->
     $resource api_path('/problems/:id/'), {id: '@id'},
       starred:
         url: api_path('/problems/starred/')
+      has_star:
+        url: api_path('/problems/:id/has_star')
+        params: {id: '@problemId'}
+      star:
+        url: api_path('/problems/:id/star/')
+        params: {id: '@id'}
+        method: 'POST'
+      unstar:
+        url: api_path('/problems/:id/unstar/')
+        params: {id: '@id'}
+        method: 'POST'
 
   'Assignment':
     $resource api_path('/assignments/:id'), {id: '@id'},

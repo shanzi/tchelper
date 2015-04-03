@@ -1,5 +1,11 @@
 <div class="problem-detail" ng-if="problem.problemData != null">
-  <small class="subtitle" ng-bind="problem.date"></small>
+  <div>
+  <small class="subtitle">
+    <span ng-bind="problem.date"></span>
+    <span class="dot-divider"></span>
+    <b ng-bind-template="#{{ problem.problemId }}"></b>
+  </small>
+  </div>
   <h1 class="title" ng-bind="problem.problemName"></h1>
   <section class="tags">
     <h2 class="section-title">related tags</h2>
@@ -10,4 +16,13 @@
   <section>
     <div class="problem-statement" ng-bind-html="problem.problemStatement"></div>
   </section>
+  <div class="star">
+    <a class="button" ng-if="!problem.has_star" ng-click="problem.star()">
+      <i class="tch-star-outline"></i> Star this problem
+    </a>
+    <a class="button" ng-if="problem.has_star" ng-click="problem.unstar()">
+      <i class="tch-star"></i>
+      Unstar this problem
+    </a>
+  </div>
 </div>
