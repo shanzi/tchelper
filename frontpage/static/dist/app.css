@@ -407,7 +407,7 @@ form .errors {
   background: #55d86c;
   border: none;
 }
-.app problem .swipe-wrapper {
+.app problem.not-touching .swipe-wrapper {
   transition: -webkit-transform 200ms ease-out;
   transition: transform 200ms ease-out;
 }

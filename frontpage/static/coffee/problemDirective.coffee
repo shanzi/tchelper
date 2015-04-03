@@ -29,17 +29,19 @@ module.exports = ($location, $swipe) ->
       $swipe.bind element,
         start: (obj) ->
           if not scope.problem.done
+            element.removeClass('not-touching')
             originX = obj.x
         move: (obj) ->
           if not scope.problem.done
             getOffset(obj.x)
             updateOffset(obj.x)
         end: (obj) ->
-          if not scope.problem.done
-            getOffset(obj.x)
-            scope.action() if swipeOffset > 80
-            swipeOffset = 0
-            updateOffset(obj.x)
-        cancel: (obj) ->
+          element.addClass('not-touching')
           swipeOffset = 0
-          updateOffset(obj.x)
+          updateOffset()
+          if not scope.problem.done
+            scope.action() if swipeOffset > 80
+        cancel: (obj) ->
+          element.addClass('not-touching')
+          swipeOffset = 0
+          updateOffset()
