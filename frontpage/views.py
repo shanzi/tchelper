@@ -1,8 +1,9 @@
 from django import forms
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.contrib.auth.forms import UserCreationForm as OriginUserCreateForm
 from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm as OriginUserCreateForm
+from django.contrib.auth.decorators import login_required
 
 
 class UserCreationForm(OriginUserCreateForm):
@@ -16,6 +17,7 @@ def index(request):
         return render(request, 'index.html')
 
 
+@login_required
 def app(request):
     return render(request, 'app.html')
 
