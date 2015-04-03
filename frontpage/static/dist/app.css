@@ -453,6 +453,9 @@ form .errors {
   border-collapse: collapse;
   word-wrap: break-word;
 }
+.app .problem-statement td {
+  vertical-align: top;
+}
 .app .star {
   text-align: center;
 }
