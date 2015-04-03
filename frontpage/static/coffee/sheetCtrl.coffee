@@ -6,30 +6,38 @@ class sheetCtrl
   has_overdue: false
   has_new: false
   has_review: false
-  constructor: ($scope, $models) ->
-    $models.Sheet.latest (data) =>
-      @sheetData = data
-      @date = data.date
-      @number = data.number
-      @problems = data.problems
-      @tags = []
-      tagMap = {}
-      for problem in @problems
-        tags = problem.tags.split(',')
-        for tag in tags
-          tag = tag.trim()
-          if tag  and (!tagMap[tag])
-            @tags.push tag
-            tagMap[tag] = true
-        switch problem.type
-          when 'overdue'
-            @has_overdue = true
-          when 'new'
-            @has_new = true
-          when 'review'
-            @has_review = true
-          else
-            
+  is_last: true
+
+  get_data: (data) ->
+    @sheetData = data
+    @is_last = data.is_last
+    @date = data.date
+    @number = data.number
+    @problems = data.problems
+    @tags = []
+    tagMap = {}
+    for problem in @problems
+      tags = problem.tags.split(',')
+      for tag in tags
+        tag = tag.trim()
+        if tag  and (!tagMap[tag])
+          @tags.push tag
+          tagMap[tag] = true
+      switch problem.type
+        when 'overdue'
+          @has_overdue = true
+        when 'new'
+          @has_new = true
+        when 'review'
+          @has_review = true
+        else
+
+  done: (problem) ->
+    @$models.Assignment.done id: problem.id, (data) =>
+      problem.done = true
+ 
+  constructor: ($routeParams, @$models) ->
+    @$models.Sheet.get number: $routeParams.number, (data) => @get_data(data)
       
 
 module.exports = sheetCtrl

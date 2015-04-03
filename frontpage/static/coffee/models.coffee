@@ -12,8 +12,10 @@ module.exports = ($resource) ->
     $resource api_path('/assignments/:id'), {id: '@id'},
       solved:
         url: api_path('/assignments/solved')
+      done:
+        url: api_path('/assignments/:id/done/')
+        params: {id: '@id'}
+        method: 'POST'
 
   'Sheet':
-    $resource api_path('/sheets/:number'), {number: '@number'},
-      latest:
-        url: api_path('/sheets/latest')
+    $resource api_path('/sheets/:number'), {number: '@number'}

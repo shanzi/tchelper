@@ -52,6 +52,7 @@ b {
   font-weight: 600;
 }
 a {
+  cursor: pointer;
   text-decoration: none;
   color: #57ad68;
 }
@@ -390,8 +391,26 @@ form .errors {
 .app problem .done-marker.done {
   color: #fff;
   background: #55d86c;
-  border-color: none;
+  border: none;
+}
+.app problem .swipe-wrapper {
+  transition: -webkit-transform 200ms ease-out;
+  transition: transform 200ms ease-out;
 }
 .app .problems problem:last-child {
   border-bottom: none;
+}
+.app .not-latest-warning {
+  color: #fa7548;
+  background: #ffe9e3;
+  border: 1px solid #ffc2b3;
+  padding: 10px;
+  margin: 30px 0;
+  text-align: center;
+  border-radius: 3px;
+}
+.app .not-latest-warning a {
+  color: #fa7548;
+  text-decoration: underline;
+  font-weight: 600;
 }

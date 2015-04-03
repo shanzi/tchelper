@@ -88,7 +88,25 @@
       &.done
         color: white 
         background: done-bg
-        border-color: none
+        border: none
+
+    .swipe-wrapper
+      transition: -webkit-transform 200ms ease-out
+      transition: transform 200ms ease-out
 
   .problems problem:last-child
     border-bottom: none
+
+  .not-latest-warning
+    color: warn-color
+    background: warn-bg-color
+    border: 1px solid warn-border-color
+    padding: 10px
+    margin: 30px 0
+    text-align: center
+    border-radius: 3px
+
+    a
+      color: warn-color
+      text-decoration: underline
+      font-weight: 600

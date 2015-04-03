@@ -25,7 +25,7 @@ from api.permissions import IsOwner
 
 class ProblemViewSet(viewsets.ReadOnlyModelViewSet):
 
-    paginate_by = 10
+    paginate_by = 20
     queryset = Problem.objects.all()
     serializer_class = ProblemSerializer
     permission_classes = (IsAuthenticated, )
@@ -102,6 +102,7 @@ class ProblemAssignmentViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ProblemSheetViewSet(viewsets.ReadOnlyModelViewSet):
 
+    paginate_by = 10
     serializer_class = ProblemSheetSerializer
     permission_classes = (IsAuthenticated, IsOwner)
     lookup_field = 'number'

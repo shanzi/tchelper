@@ -28,6 +28,8 @@ angular.module('tchApp', [
   .config ($routeProvider) ->
     $routeProvider
       .when '/',
+        redirectTo: '/sheet/latest'
+      .when '/sheet/:number',
         controller: 'sheetCtrl'
         controllerAs: 'sheet'
         templateUrl: template_path('sheet.html')
@@ -53,3 +55,4 @@ angular.module('tchApp', [
 
   .config ($httpProvider) ->
     csrf_token = document.querySelector('meta[name=csrf-token]').content
+    $httpProvider.defaults.headers.common['X-CSRFToken'] = csrf_token

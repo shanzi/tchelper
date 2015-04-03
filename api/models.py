@@ -39,6 +39,10 @@ class ProblemSheet(models.Model):
     def owner(self):
         return self.user
 
+    @property
+    def is_last(self):
+        return self.user.sheets.last().id == self.id
+
     @classmethod
     @transaction.atomic
     def add(cls, user):

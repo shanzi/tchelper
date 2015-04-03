@@ -21,6 +21,7 @@ class ProblemAssignmentSerializer(serializers.ModelSerializer):
 
 class ProblemSheetSerializer(serializers.ModelSerializer):
     problems = ProblemAssignmentSerializer(many=True, read_only=True)
+    is_last = serializers.BooleanField()
 
     class Meta:
         model = ProblemSheet

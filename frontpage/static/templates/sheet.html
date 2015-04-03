@@ -1,4 +1,8 @@
 <div class="sheet">
+  <div class="not-latest-warning" ng-if="!sheet.is_last">
+    You are viewing an old problem sheet.
+    <a ng-click="app.go('/sheet/latest')">Go to the latest one</a>.
+  </div>
   <div class="sheet-content" ng-if="sheet.sheetData != null">
     <small ng-bind="sheet.date" class="subtitle"></small>
     <h1 ng-bind-template="Problem Sheet #{{ sheet.number }}" class="title"></h1>
@@ -13,6 +17,7 @@
       <problem 
         ng-repeat="problem in sheet.problems|filter:{type:'overdue'}:strict|orderBy:'points'"
         problem="problem"
+        action="sheet.done(problem)"
       ></problem>
     </section>
     <section class="problems" ng-if="sheet.has_new">
@@ -20,6 +25,7 @@
       <problem 
         ng-repeat="problem in sheet.problems|filter:{type:'new'}:strict|orderBy:'points'"
         problem="problem"
+        action="sheet.done(problem)"
       ></problem>
     </section>
     <section class="problems" ng-if="sheet.has_review">
@@ -27,6 +33,7 @@
       <problem 
         ng-repeat="problem in sheet.problems|filter:{type:'review'}:strict|orderBy:'points'"
         problem="problem"
+        action="sheet.done(problem)"
       ></problem>
     </section>
   </div>
