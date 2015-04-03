@@ -36,11 +36,11 @@ module.exports = ($location, $swipe) ->
             getOffset(obj.x)
             updateOffset(obj.x)
         end: (obj) ->
+          if not scope.problem.done
+            scope.action() if swipeOffset > 80
           element.addClass('not-touching')
           swipeOffset = 0
           updateOffset()
-          if not scope.problem.done
-            scope.action() if swipeOffset > 80
         cancel: (obj) ->
           element.addClass('not-touching')
           swipeOffset = 0
