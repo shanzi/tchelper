@@ -441,6 +441,7 @@ form .errors {
   margin-bottom: 10px;
 }
 .app .problem-statement table {
+  text-align: left;
   width: 100%;
   table-layout: fixed;
   border-spacing: 0;
