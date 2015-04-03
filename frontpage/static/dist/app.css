@@ -38,6 +38,7 @@ body {
   font-weight: 400;
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   color: rgba(0,0,0,0.8);
+  overflow-x: hidden;
 }
 code,
 pre {
@@ -105,6 +106,10 @@ form input {
   font-size: 20px;
   text-align: center;
   margin: 10px 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
 }
 form input.button {
   font-size: 18px;
@@ -446,4 +451,5 @@ form .errors {
   table-layout: fixed;
   border-spacing: 0;
   border-collapse: collapse;
+  word-wrap: break-word;
 }

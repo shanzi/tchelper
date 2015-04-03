@@ -32,8 +32,6 @@ angular.module('tchApp', [
 
   .config ($routeProvider) ->
     $routeProvider
-      .when '/',
-        redirectTo: '/sheet/latest'
       .when '/sheet/:number',
         controller: 'sheetCtrl'
         controllerAs: 'sheet'
@@ -51,7 +49,7 @@ angular.module('tchApp', [
         controllerAs: 'problem'
         templateUrl: template_path('problem.html')
       .otherwise
-        redirectTo: '/'
+        redirectTo: '/sheet/latest'
 
   .config ($resourceProvider) ->
     $resourceProvider.defaults.stripTrailingSlashes = false
