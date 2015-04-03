@@ -3,12 +3,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <title>TCHelper</title>
   <link rel="stylesheet" href="{% static 'dist/app.css' %}" type="text/css">
   {% if debug %}
   <link rel="stylesheet" href="http://myicons.herokuapp.com/build/livetesting/058e2e8cd6ae11e484d756aa07d17eb0.css" type="text/css">
   {% else %}
-
+  <link rel="stylesheet" href="{% static 'icons/css/tchelper.min.css' %}" type="text/css">
   {% endif %}
 </head>
 <body>
