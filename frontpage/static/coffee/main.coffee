@@ -4,6 +4,7 @@ appCtrl = require './appCtrl.coffee'
 sheetCtrl = require './sheetCtrl.coffee'
 doneCtrl = require './doneCtrl.coffee'
 personCtrl = require './personCtrl.coffee'
+problemCtrl = require './problemCtrl.coffee'
 
 problemDirective = require './problemDirective.coffee'
 
@@ -15,11 +16,15 @@ angular.module('tchApp', [
   'ngRoute',
   'ngTouch',
   'ngAnimate',
+  'ngSanitize',
   'ngResource',
   'angular-loading-bar',
 ])
   .controller 'appCtrl', appCtrl
   .controller 'sheetCtrl', sheetCtrl
+  .controller 'doneCtrl', doneCtrl
+  .controller 'personCtrl', personCtrl
+  .controller 'problemCtrl', problemCtrl
 
   .directive 'problem', problemDirective
 
@@ -34,13 +39,17 @@ angular.module('tchApp', [
         controllerAs: 'sheet'
         templateUrl: template_path('sheet.html')
       .when '/done',
-        controller: doneCtrl
+        controller: 'doneCtrl'
         controllerAs: 'done'
         templateUrl: template_path('done.html')
       .when '/person',
-        controller: personCtrl
+        controller: 'personCtrl'
         controllerAs: 'person'
         templateUrl: template_path('person.html')
+      .when '/problem/:id',
+        controller: 'problemCtrl'
+        controllerAs: 'problem'
+        templateUrl: template_path('problem.html')
       .otherwise
         redirectTo: '/'
 

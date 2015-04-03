@@ -1,5 +1,5 @@
-class SearchCtrl
+class DoneCtrl
   constructor: () ->
     @title = 'TCHelper | app'
 
-module.exports = SearchCtrl
+module.exports = DoneCtrl

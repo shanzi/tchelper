@@ -1,0 +1,15 @@
+<div class="swipe-wrapper">
+  <a class="done-marker" ng-class="{done: problem.done}" ng-click="done_action">
+    <i class="tch-checkmark"></i>
+  </a>
+  <small class="subtitle" ng-bind="problem.date"></small>
+  <h3 ng-bind="problem.problemName"></h3>
+  <div class="tags" ng-bind="problem.tags"></div>
+  <div class="meta">
+    <a ng-click="detail_action()">Continue reading</a>
+    <span class="dot-divider"></span>
+    <span ng-bind="problem.points"></span> points
+    <span class="dot-divider"></span>
+    <span ng-class="problem.type" ng-bind="problem.type" class="problem-type"></span>
+  </div>
+</div>

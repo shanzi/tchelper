@@ -9,7 +9,6 @@ class sheetCtrl
   is_last: true
 
   get_data: (data) ->
-    @sheetData = data
     @is_last = data.is_last
     @date = data.date
     @number = data.number
@@ -31,6 +30,7 @@ class sheetCtrl
         when 'review'
           @has_review = true
         else
+    @sheetData = data
 
   done: (problem) ->
     @$models.Assignment.done id: problem.id, (data) =>

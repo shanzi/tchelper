@@ -1,15 +1,13 @@
-<div class="swipe-wrapper">
-  <a class="done-marker" ng-class="{done: problem.done}" ng-click="done_action">
-    <i class="tch-checkmark"></i>
-  </a>
+<div class="problem-detail" ng-if="problem.problemData != null">
   <small class="subtitle" ng-bind="problem.date"></small>
-  <h3 ng-bind="problem.problemName"></h3>
-  <div class="tags" ng-bind="problem.tags"></div>
-  <div class="meta">
-    <a ng-click="detail_action()">Continue reading</a>
-    <span class="dot-divider"></span>
-    <span ng-bind="problem.points"></span> points
-    <span class="dot-divider"></span>
-    <span ng-class="problem.type" ng-bind="problem.type" class="problem-type"></span>
-  </div>
+  <h1 class="title" ng-bind="problem.problemName"></h1>
+  <section class="tags">
+    <h2 class="section-title">related tags</h2>
+    <div>
+      <span ng-repeat="tag in problem.tags" ng-bind="tag" class="tag"></span>
+    </div>
+  </section>
+  <section>
+    <div class="problem-statement" ng-bind-html="problem.problemStatement"></div>
+  </section>
 </div>

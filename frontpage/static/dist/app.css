@@ -39,8 +39,11 @@ body {
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   color: rgba(0,0,0,0.8);
 }
-code {
+code,
+pre {
   font-family: 'Cutive Mono', Mono;
+  padding: 5px;
+  background: #fafafa;
 }
 h1,
 h2,
@@ -311,6 +314,12 @@ form .errors {
 }
 .app .title {
   font-weight: normal;
+  font-size: 6vw;
+}
+@media (min-width: 600px) {
+  .app .title {
+    font-size: 36px;
+  }
 }
 .app .subtitle {
   color: rgba(0,0,0,0.44);
@@ -413,4 +422,27 @@ form .errors {
   color: #fa7548;
   text-decoration: underline;
   font-weight: 600;
+}
+.app .problem-statement {
+  text-align: justify;
+}
+.app .problem-statement h3 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.app .problem-statement ul {
+  padding-left: 21px;
+}
+.app .problem-statement pre {
+  width: 100%;
+  overflow-x: scroll;
+}
+.app .problem-statement p {
+  margin-bottom: 10px;
+}
+.app .problem-statement table {
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: collapse;
 }

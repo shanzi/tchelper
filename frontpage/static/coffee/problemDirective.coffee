@@ -6,10 +6,10 @@ module.exports = ($location, $swipe) ->
     type: '='
     problem: '='
     action: '&'
-  templateUrl: template_path('/problem.html')
+  templateUrl: template_path('/problem_directive.html')
   link: (scope, element) ->
     scope.detail_action= ->
-      $location.path('/problem/' + scope.problemId)
+      $location.path('/problem/' + scope.problem.originProblem)
 
     swipeElement = element.children()
     originX = 0
