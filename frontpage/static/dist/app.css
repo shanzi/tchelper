@@ -475,3 +475,29 @@ form .errors {
 .app .load-more {
   text-align: center;
 }
+.app .user-actions {
+  font-size: 18px;
+  padding-top: 40px;
+}
+.app .user-actions a {
+  display: block;
+  margin: 10px 0;
+  text-align: right;
+  height: 30px;
+}
+.app .user-actions a span.button {
+  float: left;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  text-align: center;
+  line-height: 30px;
+  font-size: 26px;
+  vertical-align: middle;
+  margin-bottom: 3px;
+  margin-right: 10px;
+}
+.app .user-actions a.deactivate {
+  color: #fa7548;
+}

@@ -1,7 +1,10 @@
 <div class="swipe-wrapper">
-  <a class="done-marker" ng-class="{done: problem.done}" ng-click="done_action()">
+  <a class="done-marker" ng-class="{done: problem.done}" ng-click="done_action()" ng-if="is_assignment">
     <i class="tch-checkmark"></i>
   </a>
+  <span class="star-marker" ng-if="is_star">
+    <i class="tch-star"></i>
+  </span>
   <small class="subtitle" ng-bind="problem.date"></small>
   <h3 ng-bind="problem.problemName"></h3>
   <div class="tags" ng-bind="problem.tags"></div>
@@ -9,7 +12,7 @@
     <a ng-click="detail_action()">Continue reading</a>
     <span class="dot-divider"></span>
     <span ng-bind="problem.points"></span> points
-    <span class="dot-divider"></span>
-    <span ng-class="problem.type" ng-bind="problem.type" class="problem-type"></span>
+    <span class="dot-divider" ng-if="is_assignment"></span>
+    <span ng-class="problem.type" ng-bind="problem.type" class="problem-type" ng-if="is_assignment"></span>
   </div>
 </div>

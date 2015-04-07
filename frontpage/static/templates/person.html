@@ -1,0 +1,26 @@
+<div class="user-actions">
+  <a class="deactivate" ng-href="{{ person.deactivate_path }}">
+    <span class="button"><i class="tch-moon"></i></span>
+    Deactivate account
+  </a>
+  <a class="logout" ng-href="{{ person.logout_path }}">
+    <span class="button"><i class="tch-exit"></i></span>
+    Log out
+  </a>
+</div>
+<section class="star-list">
+  <h2 class="section-title">Starred Problems</h2>
+  <div ng-if="person.starCount == 0">
+  No problems has been starred yet.
+  </div>
+  <div class="problems" ng-if="person.starCount > 0">
+    <problem 
+        ng-repeat="problem in person.starredProblems"
+        problem="problem"
+        type="'star'"
+      ></problem>
+  </div>
+  <div class="load-more" ng-if="person.starredNext != null">
+    <a class="button" ng-click="person.star_load_more()">More</a>
+  </div>
+</section>
