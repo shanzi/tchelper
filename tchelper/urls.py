@@ -10,4 +10,6 @@ urlpatterns = patterns(
     url(r'^api/', include('api.urls')),
     url(r'^account/', include('django.contrib.auth.urls')),
     url(r'^account/signup/$', 'frontpage.views.signup', name='signup'),
+    url(r'^account/activate/$', 'frontpage.views.activate', name='activate'),
+    url(r'^account/deactivate/$', 'frontpage.views.deactivate', name='deactivate'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

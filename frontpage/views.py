@@ -19,7 +19,10 @@ def index(request):
 
 @login_required
 def app(request):
-    return render(request, 'app.html')
+    if request.user.is_active:
+        return render(request, 'app.html')
+    else:
+        return redirect('activate')
 
 
 def signup(request):
@@ -38,3 +41,21 @@ def signup(request):
     return render(request, 'registration/signup.html', {
         'form': form,
     })
+
+
+@login_required
+def deactivate(request):
+    if request.method == 'POST':
+        request.user.is_active = False
+        request.user.save()
+        return redirect('activate')
+    return render(request, 'registration/deactivate.html')
+
+
+@login_required
+def activate(request):
+    if request.method == 'POST':
+        request.user.is_active = True
+        request.user.save()
+        return redirect('app')
+    return render(request, 'registration/activate.html')

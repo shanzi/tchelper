@@ -1,0 +1,14 @@
+{% extends "app.html" %}
+
+{% block content %}
+<form name="form" action="" method="post">
+  {% csrf_token %}
+  <h1>Activate your account</h1>
+  <p>Your account is not active now. 
+  <a onclick="form.submit();">Activate</a> your account and start receiving emails to enjoy this service.
+  </p>
+</form>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
