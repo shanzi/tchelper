@@ -5,6 +5,7 @@ class PersonCtrl
   starredProblems: []
   deactivate_path: DEACTIVATE_PATH
   logout_path: LOGOUT_PATH
+  change_pass_path: CHANGE_PASS_PATH
 
   parseNext: (next)->
     if next
