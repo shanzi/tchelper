@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models, transaction
 from django.contrib.auth.models import User
 
@@ -92,6 +94,7 @@ class ProblemAssignment(models.Model):
     tags = models.CharField(max_length=128)
     date = models.DateField()
     done = models.BooleanField(default=False)
+    done_at = models.DateTimeField(null=True, blank=True)
     type = models.CharField(max_length=10, default='new', choices=(
         ('new', 'Unsolved problem'),
         ('overdue', 'Overdue problem'),
@@ -120,3 +123,8 @@ class ProblemAssignment(models.Model):
             sheet__user=self.sheet.user,
             originProblem=self.originProblem,
         ).update(done=True)
+        ProblemAssignment.objects.filter(
+            sheet__user=self.sheet.user,
+            originProblem=self.originProblem,
+            done_at=None,
+        ).update(done_at=datetime.now())

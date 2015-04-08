@@ -86,7 +86,7 @@ class ProblemAssignmentViewSet(viewsets.ReadOnlyModelViewSet):
             sheet__user=request.user,
             type='new',
             done=True
-        ).all()
+        ).order_by('-done_at').all()
         page = self.paginate_queryset(solved_assignments)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
