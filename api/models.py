@@ -2,6 +2,26 @@ from datetime import datetime
 
 from django.db import models, transaction
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    difficulty = models.IntegerField(
+        choices=(
+            (0, 'Very Easy'),
+            (1, 'Easy'),
+            (2, 'Medium'),
+            (3, 'Hard'),
+            (4, 'Very Hard'),
+        ), default=2)
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+post_save.connect(create_user_profile, sender=User)
 
 
 class Problem(models.Model):
