@@ -143,7 +143,7 @@ class ProblemComment(models.Model):
     user = models.ForeignKey(User, related_name="users")
     problem = models.ForeignKey(Problem, related_name="comments")
     content = models.TextField()
-    datetime = models.DateTimeField(auto_now_add=True, auto_now=True)
+    datetime = models.DateTimeField(auto_now_add=True, auto_now=True, db_index=True)
 
     @property
     def owner(self):
