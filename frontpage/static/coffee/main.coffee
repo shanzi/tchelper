@@ -19,6 +19,8 @@ angular.module('tchApp', [
   'ngSanitize',
   'ngResource',
   'angular-loading-bar',
+  'monospaced.elastic',
+  'ui.gravatar',
 ])
   .controller 'appCtrl', appCtrl
   .controller 'sheetCtrl', sheetCtrl

@@ -345,4 +345,219 @@ l,!0),f=[]),m=Date.now(),d(f,h,t),r&&r.blur(),u.isDefined(g.disabled)&&!1!==g.di
  * Copyright (c) 2015 Wes Cruver
  * License: MIT
  */
-!function(){"use strict";angular.module("angular-loading-bar",["cfp.loadingBarInterceptor"]),angular.module("chieffancypants.loadingBar",["cfp.loadingBarInterceptor"]),angular.module("cfp.loadingBarInterceptor",["cfp.loadingBar"]).config(["$httpProvider",function(a){var b=["$q","$cacheFactory","$timeout","$rootScope","$log","cfpLoadingBar",function(b,c,d,e,f,g){function h(){d.cancel(j),g.complete(),l=0,k=0}function i(b){var d,e=c.get("$http"),f=a.defaults;!b.cache&&!f.cache||b.cache===!1||"GET"!==b.method&&"JSONP"!==b.method||(d=angular.isObject(b.cache)?b.cache:angular.isObject(f.cache)?f.cache:e);var g=void 0!==d?void 0!==d.get(b.url):!1;return void 0!==b.cached&&g!==b.cached?b.cached:(b.cached=g,g)}var j,k=0,l=0,m=g.latencyThreshold;return{request:function(a){return a.ignoreLoadingBar||i(a)||(e.$broadcast("cfpLoadingBar:loading",{url:a.url}),0===k&&(j=d(function(){g.start()},m)),k++,g.set(l/k)),a},response:function(a){return a&&a.config?(a.config.ignoreLoadingBar||i(a.config)||(l++,e.$broadcast("cfpLoadingBar:loaded",{url:a.config.url,result:a}),l>=k?h():g.set(l/k)),a):(f.error("Broken interceptor detected: Config object not supplied in response:\n https://github.com/chieffancypants/angular-loading-bar/pull/50"),a)},responseError:function(a){return a&&a.config?(a.config.ignoreLoadingBar||i(a.config)||(l++,e.$broadcast("cfpLoadingBar:loaded",{url:a.config.url,result:a}),l>=k?h():g.set(l/k)),b.reject(a)):(f.error("Broken interceptor detected: Config object not supplied in rejection:\n https://github.com/chieffancypants/angular-loading-bar/pull/50"),b.reject(a))}}}];a.interceptors.push(b)}]),angular.module("cfp.loadingBar",[]).provider("cfpLoadingBar",function(){this.includeSpinner=!0,this.includeBar=!0,this.latencyThreshold=100,this.startSize=.02,this.parentSelector="body",this.spinnerTemplate='<div id="loading-bar-spinner"><div class="spinner-icon"></div></div>',this.loadingBarTemplate='<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>',this.$get=["$injector","$document","$timeout","$rootScope",function(a,b,c,d){function e(){k||(k=a.get("$animate"));var e=b.find(n).eq(0);c.cancel(m),r||(d.$broadcast("cfpLoadingBar:started"),r=!0,u&&k.enter(o,e,angular.element(e[0].lastChild)),t&&k.enter(q,e,angular.element(e[0].lastChild)),f(v))}function f(a){if(r){var b=100*a+"%";p.css("width",b),s=a,c.cancel(l),l=c(function(){g()},250)}}function g(){if(!(h()>=1)){var a=0,b=h();a=b>=0&&.25>b?(3*Math.random()+3)/100:b>=.25&&.65>b?3*Math.random()/100:b>=.65&&.9>b?2*Math.random()/100:b>=.9&&.99>b?.005:0;var c=h()+a;f(c)}}function h(){return s}function i(){s=0,r=!1}function j(){k||(k=a.get("$animate")),d.$broadcast("cfpLoadingBar:completed"),f(1),c.cancel(m),m=c(function(){var a=k.leave(o,i);a&&a.then&&a.then(i),k.leave(q)},500)}var k,l,m,n=this.parentSelector,o=angular.element(this.loadingBarTemplate),p=o.find("div").eq(0),q=angular.element(this.spinnerTemplate),r=!1,s=0,t=this.includeSpinner,u=this.includeBar,v=this.startSize;return{start:e,set:f,status:h,inc:g,complete:j,includeSpinner:this.includeSpinner,latencyThreshold:this.latencyThreshold,parentSelector:this.parentSelector,startSize:this.startSize}}]})}();
+!function(){"use strict";angular.module("angular-loading-bar",["cfp.loadingBarInterceptor"]),angular.module("chieffancypants.loadingBar",["cfp.loadingBarInterceptor"]),angular.module("cfp.loadingBarInterceptor",["cfp.loadingBar"]).config(["$httpProvider",function(a){var b=["$q","$cacheFactory","$timeout","$rootScope","$log","cfpLoadingBar",function(b,c,d,e,f,g){function h(){d.cancel(j),g.complete(),l=0,k=0}function i(b){var d,e=c.get("$http"),f=a.defaults;!b.cache&&!f.cache||b.cache===!1||"GET"!==b.method&&"JSONP"!==b.method||(d=angular.isObject(b.cache)?b.cache:angular.isObject(f.cache)?f.cache:e);var g=void 0!==d?void 0!==d.get(b.url):!1;return void 0!==b.cached&&g!==b.cached?b.cached:(b.cached=g,g)}var j,k=0,l=0,m=g.latencyThreshold;return{request:function(a){return a.ignoreLoadingBar||i(a)||(e.$broadcast("cfpLoadingBar:loading",{url:a.url}),0===k&&(j=d(function(){g.start()},m)),k++,g.set(l/k)),a},response:function(a){return a&&a.config?(a.config.ignoreLoadingBar||i(a.config)||(l++,e.$broadcast("cfpLoadingBar:loaded",{url:a.config.url,result:a}),l>=k?h():g.set(l/k)),a):(f.error("Broken interceptor detected: Config object not supplied in response:\n https://github.com/chieffancypants/angular-loading-bar/pull/50"),a)},responseError:function(a){return a&&a.config?(a.config.ignoreLoadingBar||i(a.config)||(l++,e.$broadcast("cfpLoadingBar:loaded",{url:a.config.url,result:a}),l>=k?h():g.set(l/k)),b.reject(a)):(f.error("Broken interceptor detected: Config object not supplied in rejection:\n https://github.com/chieffancypants/angular-loading-bar/pull/50"),b.reject(a))}}}];a.interceptors.push(b)}]),angular.module("cfp.loadingBar",[]).provider("cfpLoadingBar",function(){this.includeSpinner=!0,this.includeBar=!0,this.latencyThreshold=100,this.startSize=.02,this.parentSelector="body",this.spinnerTemplate='<div id="loading-bar-spinner"><div class="spinner-icon"></div></div>',this.loadingBarTemplate='<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>',this.$get=["$injector","$document","$timeout","$rootScope",function(a,b,c,d){function e(){k||(k=a.get("$animate"));var e=b.find(n).eq(0);c.cancel(m),r||(d.$broadcast("cfpLoadingBar:started"),r=!0,u&&k.enter(o,e,angular.element(e[0].lastChild)),t&&k.enter(q,e,angular.element(e[0].lastChild)),f(v))}function f(a){if(r){var b=100*a+"%";p.css("width",b),s=a,c.cancel(l),l=c(function(){g()},250)}}function g(){if(!(h()>=1)){var a=0,b=h();a=b>=0&&.25>b?(3*Math.random()+3)/100:b>=.25&&.65>b?3*Math.random()/100:b>=.65&&.9>b?2*Math.random()/100:b>=.9&&.99>b?.005:0;var c=h()+a;f(c)}}function h(){return s}function i(){s=0,r=!1}function j(){k||(k=a.get("$animate")),d.$broadcast("cfpLoadingBar:completed"),f(1),c.cancel(m),m=c(function(){var a=k.leave(o,i);a&&a.then&&a.then(i),k.leave(q)},500)}var k,l,m,n=this.parentSelector,o=angular.element(this.loadingBarTemplate),p=o.find("div").eq(0),q=angular.element(this.spinnerTemplate),r=!1,s=0,t=this.includeSpinner,u=this.includeBar,v=this.startSize;return{start:e,set:f,status:h,inc:g,complete:j,includeSpinner:this.includeSpinner,latencyThreshold:this.latencyThreshold,parentSelector:this.parentSelector,startSize:this.startSize}}]})}();/*
+ * angular-elastic v2.4.2
+ * (c) 2014 Monospaced http://monospaced.com
+ * License: MIT
+ */
+
+angular.module('monospaced.elastic', [])
+
+  .constant('msdElasticConfig', {
+    append: ''
+  })
+
+  .directive('msdElastic', [
+    '$timeout', '$window', 'msdElasticConfig',
+    function($timeout, $window, config) {
+      'use strict';
+
+      return {
+        require: 'ngModel',
+        restrict: 'A, C',
+        link: function(scope, element, attrs, ngModel) {
+
+          // cache a reference to the DOM element
+          var ta = element[0],
+              $ta = element;
+
+          // ensure the element is a textarea, and browser is capable
+          if (ta.nodeName !== 'TEXTAREA' || !$window.getComputedStyle) {
+            return;
+          }
+
+          // set these properties before measuring dimensions
+          $ta.css({
+            'overflow': 'hidden',
+            'overflow-y': 'hidden',
+            'word-wrap': 'break-word'
+          });
+
+          // force text reflow
+          var text = ta.value;
+          ta.value = '';
+          ta.value = text;
+
+          var append = attrs.msdElastic ? attrs.msdElastic.replace(/\\n/g, '\n') : config.append,
+              $win = angular.element($window),
+              mirrorInitStyle = 'position: absolute; top: -999px; right: auto; bottom: auto;' +
+                                'left: 0; overflow: hidden; -webkit-box-sizing: content-box;' +
+                                '-moz-box-sizing: content-box; box-sizing: content-box;' +
+                                'min-height: 0 !important; height: 0 !important; padding: 0;' +
+                                'word-wrap: break-word; border: 0;',
+              $mirror = angular.element('<textarea aria-hidden="true" tabindex="-1" ' +
+                                        'style="' + mirrorInitStyle + '"/>').data('elastic', true),
+              mirror = $mirror[0],
+              taStyle = getComputedStyle(ta),
+              resize = taStyle.getPropertyValue('resize'),
+              borderBox = taStyle.getPropertyValue('box-sizing') === 'border-box' ||
+                          taStyle.getPropertyValue('-moz-box-sizing') === 'border-box' ||
+                          taStyle.getPropertyValue('-webkit-box-sizing') === 'border-box',
+              boxOuter = !borderBox ? {width: 0, height: 0} : {
+                            width:  parseInt(taStyle.getPropertyValue('border-right-width'), 10) +
+                                    parseInt(taStyle.getPropertyValue('padding-right'), 10) +
+                                    parseInt(taStyle.getPropertyValue('padding-left'), 10) +
+                                    parseInt(taStyle.getPropertyValue('border-left-width'), 10),
+                            height: parseInt(taStyle.getPropertyValue('border-top-width'), 10) +
+                                    parseInt(taStyle.getPropertyValue('padding-top'), 10) +
+                                    parseInt(taStyle.getPropertyValue('padding-bottom'), 10) +
+                                    parseInt(taStyle.getPropertyValue('border-bottom-width'), 10)
+                          },
+              minHeightValue = parseInt(taStyle.getPropertyValue('min-height'), 10),
+              heightValue = parseInt(taStyle.getPropertyValue('height'), 10),
+              minHeight = Math.max(minHeightValue, heightValue) - boxOuter.height,
+              maxHeight = parseInt(taStyle.getPropertyValue('max-height'), 10),
+              mirrored,
+              active,
+              copyStyle = ['font-family',
+                           'font-size',
+                           'font-weight',
+                           'font-style',
+                           'letter-spacing',
+                           'line-height',
+                           'text-transform',
+                           'word-spacing',
+                           'text-indent'];
+
+          // exit if elastic already applied (or is the mirror element)
+          if ($ta.data('elastic')) {
+            return;
+          }
+
+          // Opera returns max-height of -1 if not set
+          maxHeight = maxHeight && maxHeight > 0 ? maxHeight : 9e4;
+
+          // append mirror to the DOM
+          if (mirror.parentNode !== document.body) {
+            angular.element(document.body).append(mirror);
+          }
+
+          // set resize and apply elastic
+          $ta.css({
+            'resize': (resize === 'none' || resize === 'vertical') ? 'none' : 'horizontal'
+          }).data('elastic', true);
+
+          /*
+           * methods
+           */
+
+          function initMirror() {
+            var mirrorStyle = mirrorInitStyle;
+
+            mirrored = ta;
+            // copy the essential styles from the textarea to the mirror
+            taStyle = getComputedStyle(ta);
+            angular.forEach(copyStyle, function(val) {
+              mirrorStyle += val + ':' + taStyle.getPropertyValue(val) + ';';
+            });
+            mirror.setAttribute('style', mirrorStyle);
+          }
+
+          function adjust() {
+            var taHeight,
+                taComputedStyleWidth,
+                mirrorHeight,
+                width,
+                overflow;
+
+            if (mirrored !== ta) {
+              initMirror();
+            }
+
+            // active flag prevents actions in function from calling adjust again
+            if (!active) {
+              active = true;
+
+              mirror.value = ta.value + append; // optional whitespace to improve animation
+              mirror.style.overflowY = ta.style.overflowY;
+
+              taHeight = ta.style.height === '' ? 'auto' : parseInt(ta.style.height, 10);
+
+              taComputedStyleWidth = getComputedStyle(ta).getPropertyValue('width');
+
+              // ensure getComputedStyle has returned a readable 'used value' pixel width
+              if (taComputedStyleWidth.substr(taComputedStyleWidth.length - 2, 2) === 'px') {
+                // update mirror width in case the textarea width has changed
+                width = parseInt(taComputedStyleWidth, 10) - boxOuter.width;
+                mirror.style.width = width + 'px';
+              }
+
+              mirrorHeight = mirror.scrollHeight;
+
+              if (mirrorHeight > maxHeight) {
+                mirrorHeight = maxHeight;
+                overflow = 'scroll';
+              } else if (mirrorHeight < minHeight) {
+                mirrorHeight = minHeight;
+              }
+              mirrorHeight += boxOuter.height;
+              ta.style.overflowY = overflow || 'hidden';
+
+              if (taHeight !== mirrorHeight) {
+                ta.style.height = mirrorHeight + 'px';
+                scope.$emit('elastic:resize', $ta);
+              }
+
+              // small delay to prevent an infinite loop
+              $timeout(function() {
+                active = false;
+              }, 1);
+
+            }
+          }
+
+          function forceAdjust() {
+            active = false;
+            adjust();
+          }
+
+          /*
+           * initialise
+           */
+
+          // listen
+          if ('onpropertychange' in ta && 'oninput' in ta) {
+            // IE9
+            ta['oninput'] = ta.onkeyup = adjust;
+          } else {
+            ta['oninput'] = adjust;
+          }
+
+          $win.bind('resize', forceAdjust);
+
+          scope.$watch(function() {
+            return ngModel.$modelValue;
+          }, function(newValue) {
+            forceAdjust();
+          });
+
+          scope.$on('elastic:adjust', function() {
+            initMirror();
+            forceAdjust();
+          });
+
+          $timeout(adjust);
+
+          /*
+           * destroy
+           */
+
+          scope.$on('$destroy', function() {
+            $mirror.remove();
+            $win.unbind('resize', forceAdjust);
+          });
+        }
+      };
+    }
+  ]);
+angular.module("md5",[]).factory("md5",function(){function a(a){return c(b(d(a)))}function b(a){return f(g(e(a),8*a.length))}function c(a){try{}catch(b){o=0}for(var c,d=o?"0123456789ABCDEF":"0123456789abcdef",e="",f=0;f<a.length;f++)c=a.charCodeAt(f),e+=d.charAt(c>>>4&15)+d.charAt(15&c);return e}function d(a){for(var b,c,d="",e=-1;++e<a.length;)b=a.charCodeAt(e),c=e+1<a.length?a.charCodeAt(e+1):0,b>=55296&&56319>=b&&c>=56320&&57343>=c&&(b=65536+((1023&b)<<10)+(1023&c),e++),127>=b?d+=String.fromCharCode(b):2047>=b?d+=String.fromCharCode(192|b>>>6&31,128|63&b):65535>=b?d+=String.fromCharCode(224|b>>>12&15,128|b>>>6&63,128|63&b):2097151>=b&&(d+=String.fromCharCode(240|b>>>18&7,128|b>>>12&63,128|b>>>6&63,128|63&b));return d}function e(a){for(var b=Array(a.length>>2),c=0;c<b.length;c++)b[c]=0;for(var c=0;c<8*a.length;c+=8)b[c>>5]|=(255&a.charCodeAt(c/8))<<c%32;return b}function f(a){for(var b="",c=0;c<32*a.length;c+=8)b+=String.fromCharCode(a[c>>5]>>>c%32&255);return b}function g(a,b){a[b>>5]|=128<<b%32,a[(b+64>>>9<<4)+14]=b;for(var c=1732584193,d=-271733879,e=-1732584194,f=271733878,g=0;g<a.length;g+=16){var h=c,n=d,o=e,p=f;c=i(c,d,e,f,a[g+0],7,-680876936),f=i(f,c,d,e,a[g+1],12,-389564586),e=i(e,f,c,d,a[g+2],17,606105819),d=i(d,e,f,c,a[g+3],22,-1044525330),c=i(c,d,e,f,a[g+4],7,-176418897),f=i(f,c,d,e,a[g+5],12,1200080426),e=i(e,f,c,d,a[g+6],17,-1473231341),d=i(d,e,f,c,a[g+7],22,-45705983),c=i(c,d,e,f,a[g+8],7,1770035416),f=i(f,c,d,e,a[g+9],12,-1958414417),e=i(e,f,c,d,a[g+10],17,-42063),d=i(d,e,f,c,a[g+11],22,-1990404162),c=i(c,d,e,f,a[g+12],7,1804603682),f=i(f,c,d,e,a[g+13],12,-40341101),e=i(e,f,c,d,a[g+14],17,-1502002290),d=i(d,e,f,c,a[g+15],22,1236535329),c=j(c,d,e,f,a[g+1],5,-165796510),f=j(f,c,d,e,a[g+6],9,-1069501632),e=j(e,f,c,d,a[g+11],14,643717713),d=j(d,e,f,c,a[g+0],20,-373897302),c=j(c,d,e,f,a[g+5],5,-701558691),f=j(f,c,d,e,a[g+10],9,38016083),e=j(e,f,c,d,a[g+15],14,-660478335),d=j(d,e,f,c,a[g+4],20,-405537848),c=j(c,d,e,f,a[g+9],5,568446438),f=j(f,c,d,e,a[g+14],9,-1019803690),e=j(e,f,c,d,a[g+3],14,-187363961),d=j(d,e,f,c,a[g+8],20,1163531501),c=j(c,d,e,f,a[g+13],5,-1444681467),f=j(f,c,d,e,a[g+2],9,-51403784),e=j(e,f,c,d,a[g+7],14,1735328473),d=j(d,e,f,c,a[g+12],20,-1926607734),c=k(c,d,e,f,a[g+5],4,-378558),f=k(f,c,d,e,a[g+8],11,-2022574463),e=k(e,f,c,d,a[g+11],16,1839030562),d=k(d,e,f,c,a[g+14],23,-35309556),c=k(c,d,e,f,a[g+1],4,-1530992060),f=k(f,c,d,e,a[g+4],11,1272893353),e=k(e,f,c,d,a[g+7],16,-155497632),d=k(d,e,f,c,a[g+10],23,-1094730640),c=k(c,d,e,f,a[g+13],4,681279174),f=k(f,c,d,e,a[g+0],11,-358537222),e=k(e,f,c,d,a[g+3],16,-722521979),d=k(d,e,f,c,a[g+6],23,76029189),c=k(c,d,e,f,a[g+9],4,-640364487),f=k(f,c,d,e,a[g+12],11,-421815835),e=k(e,f,c,d,a[g+15],16,530742520),d=k(d,e,f,c,a[g+2],23,-995338651),c=l(c,d,e,f,a[g+0],6,-198630844),f=l(f,c,d,e,a[g+7],10,1126891415),e=l(e,f,c,d,a[g+14],15,-1416354905),d=l(d,e,f,c,a[g+5],21,-57434055),c=l(c,d,e,f,a[g+12],6,1700485571),f=l(f,c,d,e,a[g+3],10,-1894986606),e=l(e,f,c,d,a[g+10],15,-1051523),d=l(d,e,f,c,a[g+1],21,-2054922799),c=l(c,d,e,f,a[g+8],6,1873313359),f=l(f,c,d,e,a[g+15],10,-30611744),e=l(e,f,c,d,a[g+6],15,-1560198380),d=l(d,e,f,c,a[g+13],21,1309151649),c=l(c,d,e,f,a[g+4],6,-145523070),f=l(f,c,d,e,a[g+11],10,-1120210379),e=l(e,f,c,d,a[g+2],15,718787259),d=l(d,e,f,c,a[g+9],21,-343485551),c=m(c,h),d=m(d,n),e=m(e,o),f=m(f,p)}return Array(c,d,e,f)}function h(a,b,c,d,e,f){return m(n(m(m(b,a),m(d,f)),e),c)}function i(a,b,c,d,e,f,g){return h(b&c|~b&d,a,b,e,f,g)}function j(a,b,c,d,e,f,g){return h(b&d|c&~d,a,b,e,f,g)}function k(a,b,c,d,e,f,g){return h(b^c^d,a,b,e,f,g)}function l(a,b,c,d,e,f,g){return h(c^(b|~d),a,b,e,f,g)}function m(a,b){var c=(65535&a)+(65535&b),d=(a>>16)+(b>>16)+(c>>16);return d<<16|65535&c}function n(a,b){return a<<b|a>>>32-b}var o=0;return a}),function(){var a;a=function(a){return["gravatarService",function(b){var c;return c=function(a,b){var c,d,e;d={};for(c in b)e=b[c],0===c.indexOf(a)&&(c=c.substr(a.length).toLowerCase(),c.length>0&&(d[c]=e));return d},{restrict:"A",link:function(d,e,f){var g,h,i,j;g=a?"gravatarSrcOnce":"gravatarSrc",h=f[g],delete f[g],i=c("gravatar",f),j=d.$watch(h,function(c){if(a){if(null==c)return;j()}e.attr("src",b.url(c,i))})}}}]},angular.module("ui.gravatar",["md5"]).provider("gravatarService",function(){var a,b,c;return b=this,a=/^[0-9a-f]{32}$/i,c=function(a){var b,c,d;c=[];for(b in a)d=a[b],c.push(""+b+"="+encodeURIComponent(d));return c.join("&")},this.defaults={},this.secure=!1,this.protocol=null,this.$get=["md5",function(d){return{url:function(e,f){var g,h,i,j;return null==e&&(e=""),null==f&&(f={}),f=angular.extend(angular.copy(b.defaults),f),i=b.protocol?b.protocol+":":"",j=b.secure?"https://secure":i+"//www",e=a.test(e)?e:d(e),h=[j,".gravatar.com/avatar/",e],g=c(f),g.length>0&&h.push("?"+g),h.join("")}}}],this}).directive("gravatarSrc",a()).directive("gravatarSrcOnce",a(!0))}.call(this);

@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+
 from rest_framework import serializers
 
 from api.models import (
@@ -6,6 +8,12 @@ from api.models import (
     ProblemSheet,
     ProblemComment,
 )
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('username', 'email')
 
 
 class ProblemSerializer(serializers.ModelSerializer):
@@ -27,6 +35,13 @@ class ProblemSheetSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProblemSheet
 
+
 class ProblemCommentSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    def create(self, validated_data):
+        validated_data['user'] = self.context['request'].user
+        return ProblemComment.objects.create(**validated_data)
+
     class Meta:
         model = ProblemComment

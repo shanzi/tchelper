@@ -24,3 +24,26 @@
     </a>
   </div>
 </div>
+
+<section>
+  <div class="add-comment">
+    <textarea msd-elastic ng-model="problem.newCommentContent" placeholder="Leave a comment">
+    </textarea>
+  </div>
+  <div class="comments" ng-if="problem.comments">
+    <div class="comment" ng-repeat="comment in problem.comments">
+      <div class="meta">
+        <img gravatar-src="comment.user.email" gravatar-size="20" class="avatar">
+        <span class="dot-divider"></span>
+        <b ng-bind="comment.user.username"></b>
+        <span class="dot-divider"></span>
+        <span ng-bind="comment.datetime|date: 'yyyy-MM-dd ha'"></span>
+      </div>
+      <div class="content" ng-bind="comment.content">
+      </div>
+    </div>
+  </div>
+  <div ng-if="!problem.comments">
+    No comments yet.
+  </div>
+</section>

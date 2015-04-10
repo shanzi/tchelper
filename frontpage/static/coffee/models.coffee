@@ -30,3 +30,7 @@ module.exports = ($resource) ->
 
   'Sheet':
     $resource api_path('/sheets/:number'), {number: '@number'}
+
+  'Comment':
+    $resource api_path('/comments/'), {}
+
