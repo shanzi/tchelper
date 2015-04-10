@@ -8,6 +8,7 @@ from rest_framework.decorators import (
 )
 
 from api.models import (
+    UserProfile,
     Problem,
     ProblemStar,
     ProblemSheet,
@@ -16,6 +17,7 @@ from api.models import (
 )
 
 from api.serializers import (
+    UserProfileSerializer,
     ProblemSerializer,
     ProblemAssignmentSerializer,
     ProblemSheetSerializer,
@@ -23,6 +25,13 @@ from api.serializers import (
 )
 
 from api.permissions import IsOwner
+
+
+class UserProfileViewSet(viewsets.ReadOnlyModelViewSet):
+
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = (IsAuthenticated, )
 
 
 class ProblemViewSet(viewsets.ReadOnlyModelViewSet):

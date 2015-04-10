@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 
 from api.viewsets import (
+    UserProfileViewSet,
     ProblemViewSet,
     ProblemAssignmentViewSet,
     ProblemSheetViewSet,
@@ -13,6 +14,7 @@ from api.viewsets import (
 
 router = DefaultRouter()
 
+router.register('profile', UserProfileViewSet)
 router.register('problems', ProblemViewSet)
 router.register('assignments', ProblemAssignmentViewSet)
 router.register('sheets', ProblemSheetViewSet, base_name='sheet')

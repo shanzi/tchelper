@@ -1,13 +1,19 @@
 from django import forms
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm as OriginUserCreateForm
 from django.contrib.auth.decorators import login_required
 
 
 class UserCreationForm(OriginUserCreateForm):
     email = forms.EmailField()
+
+    def save(self, commit=True, *args, **kwargs):
+        user = super(UserCreationForm, self).save(commit=False, *args, **kwargs)
+        user.email = self.cleaned_data["email"]
+        if commit: user.save()
+        return user
 
 
 def index(request):
@@ -33,7 +39,9 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
-            login(request, new_user)
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=new_user.username, password=password)
+            login(request, user)
             return redirect('app')
     else:
         form = UserCreationForm()

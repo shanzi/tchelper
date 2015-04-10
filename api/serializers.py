@@ -3,17 +3,26 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from api.models import (
+    UserProfile,
     Problem,
     ProblemAssignment,
     ProblemSheet,
     ProblemComment,
 )
 
+
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
         fields = ('username', 'email')
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = UserProfile
 
 
 class ProblemSerializer(serializers.ModelSerializer):
