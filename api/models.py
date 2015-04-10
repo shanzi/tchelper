@@ -134,3 +134,6 @@ class ProblemComment(models.Model):
     problem = models.ForeignKey(Problem, related_name="comments")
     content = models.TextField(blank=False)
     datetime = models.DateTimeField(auto_now_add=True, auto_now=True)
+
+    class Meta:
+        ordering = ('-datetime', )

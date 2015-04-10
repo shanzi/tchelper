@@ -4,6 +4,7 @@ from api.models import (
     Problem,
     ProblemAssignment,
     ProblemSheet,
+    ProblemComment,
 )
 
 
@@ -25,3 +26,7 @@ class ProblemSheetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProblemSheet
+
+class ProblemCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProblemComment

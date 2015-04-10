@@ -12,12 +12,14 @@ from api.models import (
     ProblemStar,
     ProblemSheet,
     ProblemAssignment,
+    ProblemComment,
 )
 
 from api.serializers import (
     ProblemSerializer,
     ProblemAssignmentSerializer,
     ProblemSheetSerializer,
+    ProblemCommentSerializer,
 )
 
 from api.permissions import IsOwner
@@ -118,3 +120,9 @@ class ProblemSheetViewSet(viewsets.ReadOnlyModelViewSet):
             return Response(serializer.data)
         else:
             return Response({})
+
+class ProblemCommentViewSet(viewsets.ModelViewSet):
+    serializer_class = ProblemCommentSerializer
+    permission_classes = (IsAuthenticated, IsOwner)
+    lookup_field = 'problem_id'
+    queryset = ProblemComment.objects.all()
