@@ -34,3 +34,12 @@ module.exports = ($resource) ->
   'Comment':
     $resource api_path('/comments/'), {}
 
+  'Profile':
+    $resource api_path('/profile/:id'), {id: '@id'},
+      me:
+        url: api_path('/profile/me/')
+      update:
+        url: api_path('/profile/:id')
+        params: {id: '@id'}
+        method: 'PATCH'
+

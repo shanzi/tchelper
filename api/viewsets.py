@@ -33,6 +33,12 @@ class UserProfileViewSet(viewsets.ReadOnlyModelViewSet, mixins.UpdateModelMixin)
     serializer_class = UserProfileSerializer
     permission_classes = (IsAuthenticated, IsOwner)
 
+    @list_route(methods=['get'])
+    def me(self, request):
+        profile = self.request.user.userprofile
+        serializer = self.get_serializer(profile)
+        return Response(serializer.data)
+
 
 class ProblemViewSet(viewsets.ReadOnlyModelViewSet):
 

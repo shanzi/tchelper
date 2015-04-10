@@ -1,3 +1,18 @@
+<div class="difficulty" ng-if="person.profileData">
+  <div>
+    Desired difficulty of problems
+  </div>
+  <div class="select-wrap">
+    <a class="select-title button" ng-bind="person.readable_difficulty()"></a>
+    <select name="difficulty" ng-model="person.difficulty" ng-change="person.save_difficulty()">
+      <option value="0">Very Easy</option>
+      <option value="1">Easy</option>
+      <option value="2">Medium</option>
+      <option value="3">Hard</option>
+      <option value="4">Very Hard</option>
+    </select>
+  </div>
+</div>
 <div class="user-actions">
   <a class="deactivate" ng-href="{{ person.deactivate_path }}">
     <span class="button"><i class="tch-moon"></i></span>
