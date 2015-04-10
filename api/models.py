@@ -21,11 +21,17 @@ class Problem(models.Model):
         related_name='starred_problems',
     )
 
+    def __unicode__(self):
+        return u'Problem: [#%d] %s' % (self.problemId, self.problemName)
+
 
 class ProblemStar(models.Model):
     problem = models.ForeignKey(Problem, related_name='stars')
     user = models.ForeignKey(User, related_name='stars')
     datetime = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    def __unicode__(self):
+        return u'Star: #%d <-> %s' % (self.problem.problemId, self.user.username)
 
     class Meta:
         ordering = ('-datetime', )
@@ -85,6 +91,9 @@ class ProblemSheet(models.Model):
             for problem in newproblems:
                 ProblemAssignment.assign_problem(problem, self)
 
+    def __unicode__(self):
+        return u'Sheet: #%d for %s' % (self.number, self.user.username)
+
 
 class ProblemAssignment(models.Model):
     sheet = models.ForeignKey(ProblemSheet, related_name="problems")
@@ -129,11 +138,19 @@ class ProblemAssignment(models.Model):
             done_at=None,
         ).update(done_at=datetime.now())
 
+
 class ProblemComment(models.Model):
     user = models.ForeignKey(User, related_name="users")
     problem = models.ForeignKey(Problem, related_name="comments")
-    content = models.TextField(blank=False)
+    content = models.TextField()
     datetime = models.DateTimeField(auto_now_add=True, auto_now=True)
+
+    @property
+    def owner(self):
+        return self.user
+
+    def __unicode__(self):
+        return u'Comment: %s on [#%d]' % (self.user.username, self.problem.id)
 
     class Meta:
         ordering = ('-datetime', )

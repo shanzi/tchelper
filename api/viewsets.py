@@ -121,8 +121,9 @@ class ProblemSheetViewSet(viewsets.ReadOnlyModelViewSet):
         else:
             return Response({})
 
+
 class ProblemCommentViewSet(viewsets.ModelViewSet):
     serializer_class = ProblemCommentSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
-    lookup_field = 'problem_id'
+    permission_classes = (IsAuthenticated,)
     queryset = ProblemComment.objects.all()
+    filter_fields = ('problem',)
