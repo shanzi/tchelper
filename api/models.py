@@ -128,3 +128,9 @@ class ProblemAssignment(models.Model):
             originProblem=self.originProblem,
             done_at=None,
         ).update(done_at=datetime.now())
+
+class ProblemComment(models.Model):
+    user = models.ForeignKey(User, related_name="users")
+    problem = models.ForeignKey(Problem, related_name="comments")
+    content = models.TextField(blank=False)
+    datetime = models.DateTimeField(auto_now_add=True, auto_now=True)
