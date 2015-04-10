@@ -27,11 +27,11 @@ from api.serializers import (
 from api.permissions import IsOwner
 
 
-class UserProfileViewSet(viewsets.ReadOnlyModelViewSet):
+class UserProfileViewSet(viewsets.ReadOnlyModelViewSet, mixins.UpdateModelMixin):
 
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, IsOwner)
 
 
 class ProblemViewSet(viewsets.ReadOnlyModelViewSet):
@@ -128,7 +128,7 @@ class ProblemSheetViewSet(viewsets.ReadOnlyModelViewSet):
             serializer = self.get_serializer(latest_sheet)
             return Response(serializer.data)
         else:
-            return Response({})
+            return Response({'none': True})
 
 
 class ProblemCommentViewSet(viewsets.ReadOnlyModelViewSet, mixins.CreateModelMixin):

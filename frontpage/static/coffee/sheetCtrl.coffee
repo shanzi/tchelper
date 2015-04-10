@@ -7,8 +7,12 @@ class sheetCtrl
   has_new: false
   has_review: false
   is_last: true
+  none: false
 
   get_data: (data) ->
+    if data.none
+      @none = true
+      return
     @is_last = data.is_last
     @date = data.date
     @number = data.number

@@ -1,4 +1,7 @@
-<div class="sheet">
+<div ng-if="sheet.none">
+  No sheets for you yet. The first problem sheet will arrive at next monday.
+</div>
+<div class="sheet" ng-if="!sheet.none">
   <div class="not-latest-warning" ng-if="!sheet.is_last">
     You are viewing an old problem sheet.
     <a ng-click="app.go('/sheet/latest')">Go to the latest one</a>.

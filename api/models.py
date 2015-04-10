@@ -16,6 +16,10 @@ class UserProfile(models.Model):
             (4, 'Very Hard'),
         ), default=2)
 
+    @property
+    def owner(self):
+        return self.user
+
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
