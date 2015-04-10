@@ -52,7 +52,5 @@ module.exports = ($location, $swipe) ->
     else
       scope.is_assignment = true
 
-    console.log scope
-
     if scope.action and (not scope.problem.done) and scope.is_assignment
       initSwipeAction(scope, element, $swipe)
