@@ -7,7 +7,9 @@ class ProblemCtrl
   problemStatement: ''
   tags: []
   has_star: false
-  comments: null
+  comments: []
+  newCommentContent: ''
+  disableComment: false
 
   get_data: (data) ->
     @date = data.date
@@ -28,6 +30,25 @@ class ProblemCtrl
   unstar: ->
     @$models.Problem.unstar id: @problemId, (res) =>
       @has_star = false if res.status == 'ok'
+
+  commentInvalid: ->
+      return @newCommentContent.trim().length == 0
+
+  comment: ->
+      return if @commentInvalid()
+
+      content = @newCommentContent.trim()
+      @disableComment = true
+      newComment = new @$models.Comment
+        problem: @problemId
+        content: content
+      newComment.$save (data) =>
+          @comments.unshift data
+          @newCommentContent = ''
+          @disableComment = false
+
+  clearComment: ->
+    @newCommentContent = ''
 
   constructor: ($routeParams, @$models) ->
     @$models.Problem.get id: $routeParams.id, (data) => @get_data(data)

@@ -27,10 +27,15 @@
 
 <section>
   <div class="add-comment">
-    <textarea msd-elastic ng-model="problem.newCommentContent" placeholder="Leave a comment">
+    <textarea msd-elastic ng-model="problem.newCommentContent" placeholder="Leave a comment"
+      ng-disable="problem.disableComment">
     </textarea>
+    <div class="buttons">
+      <a ng-class="{disabled: problem.commentInvalid()}" ng-click="problem.comment()">Publish</a>
+      <a ng-click="problem.clearComment()" class="close-button">Clear</a>
+    </div>
   </div>
-  <div class="comments" ng-if="problem.comments">
+  <div class="comments" ng-if="problem.comments.length > 0">
     <div class="comment" ng-repeat="comment in problem.comments">
       <div class="meta">
         <img gravatar-src="comment.user.email" gravatar-size="20" class="avatar">
@@ -43,7 +48,7 @@
       </div>
     </div>
   </div>
-  <div ng-if="!problem.comments">
+  <div ng-if="problem.comments.length == 0">
     No comments yet.
   </div>
 </section>

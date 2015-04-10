@@ -198,11 +198,26 @@
       -moz-appearance: none
       appearance: none
       width: 100%
-      min-height: 50px
       resize: none
+      height: 50px
+      transition: height ease-in-out 0.1s
+
+    .buttons
+      font-size: 14px
+
+      a.close-button
+        margin-left: 10px
+        color: text-color-lighter
+
+        &:hover
+          color: text-color-light
+
+      a.disabled
+        color: text-color-lighter
+        cursor: normal
 
   .comments
-    padding: 40px 0
+    margin-top: 40px
 
   .comment
     .meta
