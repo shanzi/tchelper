@@ -506,6 +506,7 @@ form .errors {
   font-family: 'Source Serif Pro', 'serif';
 }
 .app .add-comment textarea {
+  font-size: 16px;
   border: none;
   outline: none;
   -webkit-appearance: none;
