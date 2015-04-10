@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
@@ -122,7 +122,7 @@ class ProblemSheetViewSet(viewsets.ReadOnlyModelViewSet):
             return Response({})
 
 
-class ProblemCommentViewSet(viewsets.ModelViewSet):
+class ProblemCommentViewSet(viewsets.ReadOnlyModelViewSet, mixins.CreateModelMixin):
     serializer_class = ProblemCommentSerializer
     permission_classes = (IsAuthenticated,)
     queryset = ProblemComment.objects.all()
