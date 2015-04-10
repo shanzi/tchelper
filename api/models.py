@@ -75,6 +75,18 @@ class ProblemSheet(models.Model):
     def is_last(self):
         return self.user.sheets.last().id == self.id
 
+    @property
+    def difficulty_range(self):
+        difficulty_ranges = (
+            (0, 300),
+            (0, 400),
+            (100, 600),
+            (200, 800),
+            (500, 1000)
+        )
+        difficulty = self.user.userprofile.difficulty
+        return difficulty_ranges[difficulty]
+
     @classmethod
     @transaction.atomic
     def add(cls, user):
@@ -111,7 +123,13 @@ class ProblemSheet(models.Model):
                 sheet__user=self.user,
                 type='new',
             ).values_list('originProblem', flat=True)
-            newproblems = Problem.objects.exclude(problemId__in=allassigns).order_by('?').all()[:12 - total]
+            low, high = self.difficulty_range
+            newproblems = Problem.objects.filter(
+                points__gte=low,
+                points__lte=high,
+            ).exclude(
+                problemId__in=allassigns,
+            ).order_by('?').all()[:12 - total]
             for problem in newproblems:
                 ProblemAssignment.assign_problem(problem, self)
 
