@@ -46,12 +46,15 @@ class Command(BaseCommand):
     def send_sheet_email(self, user, sheet):
         text = utils.text_email_body_for_sheet(sheet)
         html = utils.html_email_body_for_sheet(sheet)
-        send_mail('[TCHelper] Problem Sheet #%d' % sheet.number,
-                  from_email=settings.DEFAULT_FROM_EMAIL,
-                  recipient_list=[user.email],
-                  message=text,
-                  html_message=html)
-        print '* --> mail sent to %s<%s>' % (user.username, user.email)
+        n = send_mail('[TCHelper] Problem Sheet #%d' % sheet.number,
+                      from_email=settings.DEFAULT_FROM_EMAIL,
+                      recipient_list=[user.email],
+                      message=text,
+                      html_message=html)
+        if n == 1:
+            print '* --> mail sent to %s<%s>' % (user.username, user.email)
+        else:
+            print '* --> mail failed to send'
 
     def handle(self, flush, *args, **kwargs):
         schedule.every().monday.at('00:30').do(self.new_sheet_job)
