@@ -16,7 +16,7 @@ def html_email_body_for_sheet(sheet, base_url=None):
         'date': sheet.date,
         'overdue': [p for p in problems if p['type'] == 'overdue'],
         'new': [p for p in problems if p['type'] == 'new'],
-        'review': [p for p in problems if p['type'] == 'toreview'],
+        'review': [p for p in problems if p['type'] == 'review'],
     }
     return render_to_string('sheet_email_body.html', data)
 
@@ -30,7 +30,7 @@ def text_email_body_for_sheet(sheet, base_url=None):
         'date': sheet.date,
         'overdue': [p for p in problems if p['type'] == 'overdue'],
         'new': [p for p in problems if p['type'] == 'new'],
-        'review': [p for p in problems if p['type'] == 'toreview'],
+        'review': [p for p in problems if p['type'] == 'review'],
     }
     return render_to_string('sheet_email_body.text', data)
 
