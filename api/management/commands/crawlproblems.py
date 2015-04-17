@@ -2,6 +2,7 @@ import re
 import time
 import random
 import pyquery
+from optparse import make_option
 
 from datetime import date
 from django.core.management.base import BaseCommand, CommandError
@@ -10,6 +11,18 @@ from api.models import Problem
 
 
 class Command(BaseCommand):
+    option_list = BaseCommand.option_list + (
+        make_option('-s', '--skip',
+                    type='int',
+                    dest='skip',
+                    default=0,
+                    help='Skip how many problems when crawling'),
+        make_option('-n', '--number',
+                    type='int',
+                    dest='num',
+                    default=100,
+                    help='Number of problems to crawl'),
+    )
 
     def level_to_int(self, string):
         return int(string.strip() or -1)
@@ -54,6 +67,7 @@ class Command(BaseCommand):
             tr = trs.eq(i)
             td = tr.children('td')
             problemName = td.eq(1).text().strip()
+            matchName = td.eq(2).text().strip()
             date = self.parse_date(td.eq(3).text().strip())
             tags = td.eq(5).text().strip()
             div1_level = self.level_to_int(td.eq(6).text())
@@ -63,7 +77,7 @@ class Command(BaseCommand):
             detail_url = td.eq(10).children('a').attr('href')
             problemId = int(re.search(r'pm=(\d+)', detail_url).groups()[0])
             points = self.points_for_problem(div1_level, div1_rate, div2_level, div2_rate)
-            yield problemId, problemName, date, tags, points
+            yield problemId, problemName, matchName, date, tags, points
 
     def clear_problem_statement(self, table):
         trs = table.children('tr')
@@ -95,21 +109,26 @@ class Command(BaseCommand):
 
     def handle_problems_for_range(self, start, end):
         print '-' * 20, ' ', start, ' - ', end, ' ', '-' * 20
-        for pid, pname, date_, tags, points in self.simple_problems_for_url(self.url_for_problems(start, end)):
-            print pid, pname, date, tags, points
+        for pid, pname, mname, date_, tags, points in self.simple_problems_for_url(self.url_for_problems(start, end)):
+            print pid, pname, mname, date, tags, points
             time.sleep(random.randrange(5, 20))
             statement = self.problem_statement_with_id(pid)
-            Problem.objects.get_or_create(
+            p, created = Problem.objects.get_or_create(
                 problemId=pid,
                 defaults=dict(
                     problemName=pname,
                     problemStatement=statement,
+                    matchName=mname,
                     date=date_,
                     tags=tags,
                     points=points
                 ))
+            if not p.matchName:
+                p.matchName = mname
+                p.save()
 
-    def handle(self, *args, **kwargs):
-        for i in range(0, 1000, 100):
-            self.handle_problems_for_range(i + 1, i + 100)
+    def handle(self, skip, num, *args, **kwargs):
+        end = skip + num
+        for i in range(skip, end, 100):
+            self.handle_problems_for_range(i + 1, min(i + 100, end))
             time.sleep(random.randrange(5, 20))

@@ -33,6 +33,8 @@ class Problem(models.Model):
     problemName = models.CharField(max_length=128, db_index=True)
     problemStatement = models.TextField()
 
+    matchName = models.CharField(max_length=64, db_index=True)
+
     points = models.IntegerField(db_index=True)
     tags = models.CharField(max_length=128, db_index=True)
 
