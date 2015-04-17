@@ -5,6 +5,7 @@ class ProblemCtrl
   problemId: ''
   problemName: ''
   problemStatement: ''
+  matchName: ''
   tags: []
   has_star: false
   comments: []
@@ -16,6 +17,7 @@ class ProblemCtrl
     @problemId = data.problemId
     @problemName = data.problemName
     @problemStatement = data.problemStatement
+    @matchName = data.matchName
     @tags = (tag.trim() for tag in data.tags.split(','))
     @problemData = data
     @$models.Problem.has_star id: @problemId, (res) => @has_star = res.has_star

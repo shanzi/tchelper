@@ -553,6 +553,7 @@ form .errors {
   min-height: 80px;
   padding-left: 45px;
   white-space: pre-wrap;
+  word-break: break-all;
 }
 .app .difficulty {
   text-align: center;
