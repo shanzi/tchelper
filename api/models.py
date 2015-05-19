@@ -80,11 +80,11 @@ class ProblemSheet(models.Model):
     @property
     def difficulty_range(self):
         difficulty_ranges = (
-            (0, 300),
-            (0, 400),
-            (100, 600),
-            (200, 800),
-            (500, 1000)
+            (0, 200),
+            (200, 400),
+            (400, 600),
+            (600, 800),
+            (800, 1000)
         )
         difficulty = self.user.userprofile.difficulty
         return difficulty_ranges[difficulty]
