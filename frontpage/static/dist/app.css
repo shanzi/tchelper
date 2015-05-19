@@ -456,6 +456,9 @@ form .errors {
 .app .problem-statement td {
   vertical-align: top;
 }
+.app .problem-statement img {
+  max-width: 100%;
+}
 .app .star {
   text-align: center;
 }
