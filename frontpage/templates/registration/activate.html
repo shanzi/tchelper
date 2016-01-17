@@ -5,7 +5,8 @@
   {% csrf_token %}
   <h1>Activate your account</h1>
   <p>Your account is not active now. 
-  <a onclick="form.submit();">Activate</a> your account and start receiving emails to enjoy this service.
+  <a onclick="form.submit();">Activate</a> your account and start receiving emails to enjoy this service or
+  <a href="{% url 'logout' %}" >logout</a>.
   </p>
 </form>
 {% endblock content %}
