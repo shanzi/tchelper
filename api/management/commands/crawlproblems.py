@@ -64,20 +64,23 @@ class Command(BaseCommand):
         table = tables.eq(tables.length - 1)
         trs = table.children('tr')
         for i in range(3, len(trs) - 6):
-            tr = trs.eq(i)
-            td = tr.children('td')
-            problemName = td.eq(1).text().strip()
-            matchName = td.eq(2).text().strip()
-            date = self.parse_date(td.eq(3).text().strip())
-            tags = td.eq(5).text().strip()
-            div1_level = self.level_to_int(td.eq(6).text())
-            div1_rate = self.percent_to_float(td.eq(7).text())
-            div2_level = self.level_to_int(td.eq(8).text())
-            div2_rate = self.percent_to_float(td.eq(9).text())
-            detail_url = td.eq(10).children('a').attr('href')
-            problemId = int(re.search(r'pm=(\d+)', detail_url).groups()[0])
-            points = self.points_for_problem(div1_level, div1_rate, div2_level, div2_rate)
-            yield problemId, problemName, matchName, date, tags, points
+            try:
+                tr = trs.eq(i)
+                td = tr.children('td')
+                problemName = td.eq(1).text().strip()
+                matchName = td.eq(2).text().strip()
+                date = self.parse_date(td.eq(3).text().strip())
+                tags = td.eq(5).text().strip()
+                div1_level = self.level_to_int(td.eq(6).text())
+                div1_rate = self.percent_to_float(td.eq(7).text())
+                div2_level = self.level_to_int(td.eq(8).text())
+                div2_rate = self.percent_to_float(td.eq(9).text())
+                detail_url = td.eq(10).children('a').attr('href')
+                problemId = int(re.search(r'pm=(\d+)', detail_url).groups()[0])
+                points = self.points_for_problem(div1_level, div1_rate, div2_level, div2_rate)
+                yield problemId, problemName, matchName, date, tags, points
+            except Exception, e:
+                print repr(e)
 
     def clear_problem_statement(self, table):
         trs = table.children('tr')
