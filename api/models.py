@@ -30,13 +30,13 @@ post_save.connect(create_user_profile, sender=User)
 
 class Problem(models.Model):
     problemId = models.IntegerField(primary_key=True)
-    problemName = models.CharField(max_length=128, db_index=True)
+    problemName = models.CharField(max_length=256, db_index=True)
     problemStatement = models.TextField()
 
-    matchName = models.CharField(max_length=64, db_index=True)
+    matchName = models.CharField(max_length=128, db_index=True)
 
     points = models.IntegerField(db_index=True)
-    tags = models.CharField(max_length=128, db_index=True)
+    tags = models.CharField(max_length=512, db_index=True)
 
     date = models.DateField(db_index=True)
 
