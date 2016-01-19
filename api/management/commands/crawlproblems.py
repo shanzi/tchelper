@@ -113,22 +113,25 @@ class Command(BaseCommand):
     def handle_problems_for_range(self, start, end):
         print '-' * 20, ' ', start, ' - ', end, ' ', '-' * 20
         for pid, pname, mname, date_, tags, points in self.simple_problems_for_url(self.url_for_problems(start, end)):
-            print pid, pname, mname, date, tags, points
-            time.sleep(random.randrange(5, 20))
-            statement = self.problem_statement_with_id(pid)
-            p, created = Problem.objects.get_or_create(
-                problemId=pid,
-                defaults=dict(
-                    problemName=pname,
-                    problemStatement=statement,
-                    matchName=mname,
-                    date=date_,
-                    tags=tags,
-                    points=points
-                ))
-            if not p.matchName:
-                p.matchName = mname
-                p.save()
+            try:
+                print pid, pname, mname, date, tags, points
+                time.sleep(random.randrange(5, 20))
+                statement = self.problem_statement_with_id(pid)
+                p, created = Problem.objects.get_or_create(
+                    problemId=pid,
+                    defaults=dict(
+                        problemName=pname,
+                        problemStatement=statement,
+                        matchName=mname,
+                        date=date_,
+                        tags=tags,
+                        points=points
+                    ))
+                if not p.matchName:
+                    p.matchName = mname
+                    p.save()
+            except Exception, e:
+                print repr(e)
 
     def handle(self, skip, num, *args, **kwargs):
         end = skip + num
