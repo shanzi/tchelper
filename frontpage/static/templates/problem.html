@@ -16,6 +16,12 @@
   <section>
     <div class="problem-statement" ng-bind-html="problem.problemStatement"></div>
   </section>
+
+  <div class="gettc">
+    Solve this problem with <a href="http://seri.github.io/gettc/" target="_blank">gettc</a>:
+    <pre>gettc {{ problem.problemId }}</pre>
+  </div>
+
   <div class="star">
     <a class="button" ng-if="!problem.has_star" ng-click="problem.star()">
       <i class="tch-star-outline"></i> Star this problem

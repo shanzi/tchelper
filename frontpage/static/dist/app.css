@@ -459,6 +459,10 @@ form .errors {
 .app .problem-statement img {
   max-width: 100%;
 }
+.app .gettc {
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
 .app .star {
   text-align: center;
 }
