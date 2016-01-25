@@ -1,5 +1,4 @@
 Django==1.7.5
-PyMySQL==0.6.6
 argparse==1.2.1
 cssselect==0.9.1
 dj-database-url==0.3.0
