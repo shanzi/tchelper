@@ -1,2 +1,2 @@
 web: gunicorn tchelper.wsgi --log-file=- --access-logfile=-
-schedule: python manage.py runschedule
+runschedule: python manage.py runschedule
