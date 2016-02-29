@@ -12,7 +12,7 @@ from api.viewsets import (
     ProblemCommentViewSet,
 )
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 
 router.register('profile', UserProfileViewSet)
 router.register('problems', ProblemViewSet)
