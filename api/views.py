@@ -13,5 +13,5 @@ def test_html_email(request, sheet_id):
 def test_text_email(request, sheet_id):
     from api.utils import text_email_body_for_sheet
     sheet = ProblemSheet.objects.get(id=sheet_id)
-    body = text_email_body_for_sheet(sheet, 'http://' + request.get_host())
+    body = text_email_body_for_sheet(sheet, 'https://' + request.get_host())
     return HttpResponse(body)
