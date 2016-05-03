@@ -17,4 +17,4 @@ Review solved problems
 {% for problem in review %}{% include "_problem_item.text" %}{% endfor %}{% endif %}
 ---------
 This email is from TCHelper, a helper and planer for practicing algorithm problems.
-Stop receiving emails like this by deactivating you account at [{{ base_url }}/account/deactivate]
+Stop receiving emails like this by deactivating you account at [{{ base_url }}/account/deactivate/]
